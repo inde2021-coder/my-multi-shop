@@ -1,0 +1,12 @@
+{
+  "background_color": "#ffffff",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "Bartan Booking",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "B p app",
+  "start_url": "/index.html",
+  "theme_color": "#4a90e2",
+  "lang": "en"
+}

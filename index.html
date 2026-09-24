@@ -50,6 +50,12 @@
             box-shadow: 8px 8px 16px rgba(163, 177, 198, 0.5), -8px -8px 16px rgba(255, 255, 255, 0.8) !important;
         }
 
+        .settings-section-card { background: #e4ebf5; border-radius: 20px; margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.8); box-shadow: 6px 6px 12px rgba(163,177,198,0.5), -6px -6px 12px rgba(255,255,255,0.8); overflow: hidden; }
+        .settings-section-header { padding: 14px 18px; font-size: 14px; font-weight: 800; color: var(--primary-blue); display: flex; justify-content: space-between; align-items: center; cursor: pointer; background: rgba(228,235,245,0.8); user-select: none; }
+        .settings-section-header:hover { background: rgba(219,234,254,0.5); }
+        .settings-section-body { padding: 16px 18px; display: none; border-top: 1px solid rgba(255,255,255,0.5); }
+        .settings-section-body.show { display: block; }
+
         .table-lamp-container { position: relative; margin: 0 auto 10px auto; display: flex; flex-direction: column; align-items: center; z-index: 10; width: 100%; }
         .table-lamp-base { width: 60px; height: 12px; background: linear-gradient(135deg, #d4af37, #aa820a); border-radius: 6px 6px 2px 2px; }
         .table-lamp-stand { width: 6px; height: 20px; background: linear-gradient(90deg, #b8860b, #ffd700, #b8860b); }
@@ -297,7 +303,7 @@
                         <div style="font-size: 14px; font-weight: 800; color: var(--primary-blue); margin-bottom: 8px; border-bottom: 2px solid rgba(43,108,176,0.15); padding-bottom: 4px;"><i class="fa-solid fa-user"></i> ग्राहक विवरण</div>
                         <div class="form-grid">
                             <div><label><i class="fa-solid fa-signature"></i> नाम</label><input type="text" id="portalCustName" required placeholder="पूरा नाम" value=""></div>
-                            <div><label><i class="fa-solid fa-phone"></i> मोबाइल नंबर</label><input type="tel" id="portalCustMob" required pattern="[0-9]{10}" maxlength="10" placeholder="10 अंकों का नंबर" value=""></div>
+                            <div><label><i class="fa-solid fa-phone"></i> मोबाइल नंबर</label><input type="tel" id="portalCustMob" required pattern="[6-9][0-9]{9}" maxlength="10" placeholder="10 अंकों का सही मोबाइल नंबर" value=""></div>
                             <div style="grid-column: 1/-1;"><label><i class="fa-solid fa-location-dot"></i> पूरा पता</label><textarea id="portalCustAddress" rows="1.5" required placeholder="पता दर्ज करें"></textarea></div>
                         </div>
                     </div>
@@ -316,8 +322,10 @@
                                 </select>
                             </div>
                             <div><label><i class="fa-solid fa-users"></i> गेस्ट काउंट</label><input type="number" id="portalGuestCount" min="1" value="" required placeholder="संख्या"></div>
-                            <div><label><i class="fa-solid fa-truck-fast"></i> डिस्पैच दिनांक</label><input type="date" id="portalEventDate" required value=""></div>
-                            <div><label><i class="fa-solid fa-rotate-left"></i> वापसी दिनांक</label><input type="date" id="portalReturnDate" required value=""></div>
+                            
+                            <!-- Date fields with Min validation set to today -->
+                            <div><label><i class="fa-solid fa-truck-fast"></i> डिस्पैच दिनांक</label><input type="date" id="portalEventDate" required onchange="updateReturnDateMinConstraint()"></div>
+                            <div><label><i class="fa-solid fa-rotate-left"></i> वापसी दिनांक</label><input type="date" id="portalReturnDate" required></div>
                         </div>
                     </div>
 
@@ -374,6 +382,7 @@
                     <li class="menu-item active" onclick="switchTab('dashboard', this)"><i class="fa-solid fa-chart-pie" style="color:#2b6cb0;"></i> डैशबोर्ड</li>
                     <li class="menu-item" onclick="switchTab('master-ledger', this)"><i class="fa-solid fa-book" style="color:#d69e2e;"></i> मास्टर हिसाब-किताब</li>
                     <li class="menu-item" onclick="switchTab('ai-assistant', this)"><i class="fa-solid fa-robot" style="color:#3182ce;"></i> AI असिस्टेंट</li>
+                    <li class="menu-item" onclick="switchTab('direct-due-entry', this)"><i class="fa-solid fa-file-circle-plus" style="color:#10b981;"></i> डायरेक्ट ड्यू एंट्री</li>
                     <li class="menu-item" onclick="switchTab('customer-list', this)"><i class="fa-solid fa-users" style="color:#d53f8c;"></i> कस्टमर्स</li>
                     <li class="menu-item" onclick="switchTab('booking-list', this)"><i class="fa-solid fa-calendar-check" style="color:#2f855a;"></i> बुकिंग्स</li>
                     <li class="menu-item" onclick="switchTab('dispatch', this)"><i class="fa-solid fa-truck" style="color:#dd6b20;"></i> डिस्पैच</li>
@@ -423,6 +432,22 @@
                         </div>
                     </div>
 
+                    <!-- Direct Due Entry Page -->
+                    <div id="direct-due-entry" class="page-section">
+                        <form onsubmit="saveDirectDueCustomerEntry(event)" class="glass-card-blue" style="margin-bottom: 12px;">
+                            <h3 style="color: var(--primary-blue); font-size: 16px; margin-bottom: 10px;"><i class="fa-solid fa-file-circle-plus"></i> कस्टमर और डायरेक्ट ड्यू पेमेंट एंट्री</h3>
+                            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">यहाँ से आप सीधे कस्टमर की डिटेल्स और उनका बकाया (Due) पेमेंट दर्ज कर सकते हैं, जो तुरंत कस्टमर लिस्ट और मास्टर लेज़र में शो होने लगेगा।</p>
+                            <div class="form-grid">
+                                <div><label>ग्राहक का नाम</label><input type="text" id="dirCustName" required placeholder="पूरा नाम" value=""></div>
+                                <div><label>मोबाइल नंबर</label><input type="tel" id="dirCustMob" required pattern="[6-9][0-9]{9}" maxlength="10" placeholder="10 अंकों का मोबाइल" value=""></div>
+                                <div><label>पूरा पता</label><input type="text" id="dirCustAddress" required placeholder="पता दर्ज करें" value=""></div>
+                                <div><label>कुल किराया राशि (Total Rent ₹)</label><input type="number" id="dirTotalRent" required min="1" placeholder="कुल किराया" value=""></div>
+                                <div><label>जमा राशि / एडवांस (Paid ₹)</label><input type="number" id="dirPaidAmount" required min="0" placeholder="जमा रुपये" value=""></div>
+                                <button type="submit" class="glass-btn-green" style="grid-column: 1/-1; margin-top:4px;"><i class="fa-solid fa-floppy-disk"></i> ड्यू एंट्री सेव करें</button>
+                            </div>
+                        </form>
+                    </div>
+
                     <!-- Master Ledger -->
                     <div id="master-ledger" class="page-section">
                         <div class="glass-card-blue">
@@ -435,7 +460,7 @@
                         </div>
                         <div class="table-responsive">
                             <table>
-                                <thead><tr><th>आईडी</th><th>नाम</th><th>मोबाइल</th><th>पता</th><th>फंक्शन</th><th>एडवांस</th><th>स्टेटस</th></tr></thead>
+                                <thead><tr><th>आईडी</th><th>नाम</th><th>मोबाइल</th><th>पता</th><th>विवरण / फंक्शन</th><th>एडवांस / भुगतान</th><th>स्टेटस</th></tr></thead>
                                 <tbody id="ledgerBookingTableBody"><tr><td colspan="7" style="text-align:center;">कोई डेटा नहीं</td></tr></tbody>
                             </table>
                         </div>
@@ -461,8 +486,8 @@
                     <div id="customer-list" class="page-section">
                         <div class="table-responsive">
                             <table>
-                                <thead><tr><th>नाम</th><th>मोबाइल</th><th>पता</th><th>किराया</th><th>भुगतान</th><th>बाकी</th><th>किश्त हिस्ट्री</th><th>एक्शन</th></tr></thead>
-                                <tbody id="customerTableBody"><tr><td colspan="8" style="text-align:center;">कोई रिकॉर्ड नहीं</td></tr></tbody>
+                                <thead><tr><th>नाम</th><th>मोबाइल (Call)</th><th>पता</th><th>किराया</th><th>भुगतान</th><th>बाकी (Due)</th><th>7-दिन का रिमाइंडर</th><th>WhatsApp</th><th>एक्शन</th></tr></thead>
+                                <tbody id="customerTableBody"><tr><td colspan="9" style="text-align:center;">कोई रिकॉर्ड नहीं</td></tr></tbody>
                             </table>
                         </div>
                     </div>
@@ -495,8 +520,8 @@
                                     <option value="Single">सिंगल रेंट (Single)</option>
                                 </select>
                             </div>
-                            
-                            <!-- Third Party Dispatch Box with fixed 'सामान चुनें' dropdown label -->
+
+                            <!-- Third Party Dispatch Box -->
                             <div id="thirdPartyDispatchSection" style="display: none; background: rgba(236,72,153,0.1); padding: 12px; border-radius: 12px; border: 1px dashed var(--pink-neon); margin-bottom: 10px;">
                                 <h4 style="color: var(--pink-neon); font-size: 13px; margin-bottom: 6px;"><i class="fa-solid fa-shop"></i> थर्ड-पार्टी पार्टी और सामान चुनें</h4>
                                 <div class="form-grid">
@@ -698,26 +723,79 @@
                         </div>
                     </div>
 
-                    <!-- Settings -->
+                    <!-- Settings with Direct Logo Upload & Collapsible Sections -->
                     <div id="setting" class="page-section">
-                        <form onsubmit="saveSettings(event)" class="glass-card-blue" style="margin-bottom: 12px;">
-                            <h3 style="color:var(--primary-blue); font-size:15px; margin-bottom:8px;"><i class="fa-solid fa-qrcode"></i> सॉफ्टवेयर लिंक, QR कोड और GST सेटिंग्स</h3>
-                            <div class="form-grid">
-                                <div><label>सॉफ्टवेयर लाइव लिंक (URL)</label><input type="text" id="settingSoftwareUrl" placeholder="https://..." value="" oninput="generatePortalQrCode(this.value)"></div>
-                                <div><label>डिफ़ॉल्ट GST (%)</label><input type="number" id="settingDefaultGst" min="0" max="28" value="" placeholder="18"></div>
+                        
+                        <!-- Section 1: QR Code & Portal Link -->
+                        <div class="settings-section-card">
+                            <div class="settings-section-header" onclick="toggleSettingsSection('secQrBody')">
+                                <span><i class="fa-solid fa-qrcode" style="color:var(--primary-blue);"></i> QR कोड और कस्टमर पोर्टल लिंक</span>
+                                <i class="fa-solid fa-chevron-down"></i>
                             </div>
-                            <div style="text-align: center; margin: 10px 0; background: #fff; padding: 12px; border-radius: 14px; display: inline-block;">
-                                <canvas id="portalShareQrCanvas" style="width: 130px; height: 130px; border-radius: 8px;"></canvas>
+                            <div id="secQrBody" class="settings-section-body show">
+                                <form onsubmit="saveSettings(event)">
+                                    <div class="form-grid">
+                                        <div><label>सॉफ्टवेयर लाइव लिंक (URL)</label><input type="text" id="settingSoftwareUrl" placeholder="https://..." value="http://my-multi-shop.vercel.app" oninput="generatePortalQrCode(this.value)"></div>
+                                    </div>
+                                    <div style="text-align: center; margin: 10px 0;">
+                                        <canvas id="portalShareQrCanvas" style="width: 130px; height: 130px; border-radius: 8px; background:#fff; padding:6px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);"></canvas>
+                                        <div style="margin-top: 10px;">
+                                            <button type="button" onclick="sharePortalQrCode()" class="glass-btn-green" style="max-width: 220px; margin: 0 auto;"><i class="fa-solid fa-share-nodes"></i> QR कोड शेयर करें</button>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="glass-btn-blue" style="margin-top:6px;"><i class="fa-solid fa-floppy-disk"></i> लिंक सेव करें</button>
+                                </form>
                             </div>
-                            <div class="form-grid">
-                                <div><label>दुकान का नाम</label><input type="text" id="settingBusinessName" required value="" placeholder="राधा कृष्णा टेंट हाउस"></div>
-                                <div><label>डेवलपर नाम</label><input type="text" id="settingDeveloperName" required value="SHARD PATEL"></div>
-                                <div><label>संपर्क</label><input type="tel" id="settingContactNo" required value="" placeholder="मोबाइल नंबर"></div>
-                                <div><label>लोगो URL</label><input type="text" id="settingLogoUrl" placeholder="Logo link" value=""></div>
-                                <div><label>पासवर्ड</label><input type="text" id="settingAdminPass" placeholder="नया पासवर्ड" value=""></div>
-                                <button type="submit" class="glass-btn-blue" style="grid-column: 1/-1; margin-top:0;"><i class="fa-solid fa-floppy-disk"></i> सेव करें</button>
+                        </div>
+
+                        <!-- Section 2: WhatsApp Cloud API -->
+                        <div class="settings-section-card">
+                            <div class="settings-section-header" onclick="toggleSettingsSection('secWaBody')">
+                                <span><i class="fa-brands fa-whatsapp" style="color:var(--emerald-neon);"></i> WhatsApp Cloud API सेटिंग्स</span>
+                                <i class="fa-solid fa-chevron-down"></i>
                             </div>
-                        </form>
+                            <div id="secWaBody" class="settings-section-body">
+                                <form onsubmit="saveSettings(event)">
+                                    <div class="form-grid">
+                                        <div><label>WhatsApp Phone Number ID</label><input type="text" id="settingWaPhoneId" placeholder="Phone ID" value=""></div>
+                                        <div><label>WhatsApp Access Token</label><input type="password" id="settingWaToken" placeholder="Permanent Token" value=""></div>
+                                    </div>
+                                    <button type="submit" class="glass-btn-blue" style="margin-top:6px;"><i class="fa-solid fa-floppy-disk"></i> WhatsApp सेटिंग्स सेव करें</button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Section 3: Business, Direct Logo Upload & Security -->
+                        <div class="settings-section-card">
+                            <div class="settings-section-header" onclick="toggleSettingsSection('secBizBody')">
+                                <span><i class="fa-solid fa-shop" style="color:var(--amber-neon);"></i> दुकान, लोगो अपलोड और सुरक्षा सेटिंग्स</span>
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </div>
+                            <div id="secBizBody" class="settings-section-body">
+                                <form onsubmit="saveSettings(event)">
+                                    <div class="form-grid">
+                                        <div><label>दुकान का नाम</label><input type="text" id="settingBusinessName" required value="" placeholder="राधा कृष्णा टेंट हाउस"></div>
+                                        <div><label>डेवलपर नाम</label><input type="text" id="settingDeveloperName" required value="SHARD PATEL"></div>
+                                        <div><label>संपर्क</label><input type="tel" id="settingContactNo" required value="" placeholder="मोबाइल नंबर"></div>
+                                        <div><label>डिफ़ॉल्ट GST (%)</label><input type="number" id="settingDefaultGst" min="0" max="28" value="" placeholder="18"></div>
+                                        
+                                        <!-- Direct Logo Image Upload Field -->
+                                        <div style="grid-column: 1/-1;">
+                                            <label><i class="fa-solid fa-image"></i> दुकान का लोगो अपलोड करें (Direct Image)</label>
+                                            <input type="file" id="settingLogoFile" accept="image/*" onchange="handleLogoImageUpload(event)" style="padding: 8px !important;">
+                                            <input type="hidden" id="settingLogoUrl" value="">
+                                            <div id="logoPreviewContainer" style="margin-top: 8px; display: none;">
+                                                <img id="logoPreviewImg" src="" alt="Logo Preview" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary-blue);">
+                                            </div>
+                                        </div>
+
+                                        <div><label>पासवर्ड</label><input type="text" id="settingAdminPass" placeholder="नया पासवर्ड" value=""></div>
+                                    </div>
+                                    <button type="submit" class="glass-btn-blue" style="margin-top:6px;"><i class="fa-solid fa-floppy-disk"></i> दुकान सेटिंग्स सेव करें</button>
+                                </form>
+                            </div>
+                        </div>
+
                     </div>
 
                 </div>
@@ -768,6 +846,27 @@
         let stockHtmlScanner = null;
         let currentCalendarDate = new Date();
 
+        // Set Minimum Date for Dispatch Date input field to Today on load
+        window.addEventListener('DOMContentLoaded', () => {
+            let todayStr = new Date().toISOString().slice(0, 10);
+            let dispatchDateInput = document.getElementById('portalEventDate');
+            if(dispatchDateInput) {
+                dispatchDateInput.min = todayStr;
+            }
+        });
+
+        function updateReturnDateMinConstraint() {
+            let dispatchDateInput = document.getElementById('portalEventDate');
+            let returnDateInput = document.getElementById('portalReturnDate');
+            if(dispatchDateInput && returnDateInput) {
+                let selectedDispatch = dispatchDateInput.value;
+                returnDateInput.min = selectedDispatch;
+                if(returnDateInput.value && returnDateInput.value < selectedDispatch) {
+                    returnDateInput.value = selectedDispatch;
+                }
+            }
+        }
+
         function syncToCloud() {
             if(dbRef && navigator.onLine) {
                 dbRef.update({
@@ -812,43 +911,119 @@
             if(sb) sb.classList.toggle('mobile-show');
         }
 
-        // Fixed Third-Party Toggle Function for Dispatch Page
-        function toggleThirdPartyDispatchBox() {
-            let chk = document.getElementById('useThirdPartyToggle');
-            let sec = document.getElementById('thirdPartyDispatchSection');
-            if (chk && sec) {
-                sec.style.display = chk.checked ? 'block' : 'none';
-                if (chk.checked) {
-                    loadStockDropdowns();
-                    loadThirdPartyDropdownsForDispatch();
+        function toggleSettingsSection(bodyId) {
+            let bodyEl = document.getElementById(bodyId);
+            if(bodyEl) {
+                bodyEl.classList.toggle('show');
+            }
+        }
+
+        function handleLogoImageUpload(event) {
+            let file = event.target.files[0];
+            if(file) {
+                let reader = new FileReader();
+                reader.onload = function(e) {
+                    let base64String = e.target.result;
+                    let logoUrlInput = document.getElementById('settingLogoUrl');
+                    if(logoUrlInput) logoUrlInput.value = base64String;
+
+                    let previewImg = document.getElementById('logoPreviewImg');
+                    let previewContainer = document.getElementById('logoPreviewContainer');
+                    if(previewImg && previewContainer) {
+                        previewImg.src = base64String;
+                        previewContainer.style.display = 'block';
+                    }
+                    showActionMessage("लोगो अपलोड और सिलेक्ट हो गया है", "success");
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function sharePortalQrCode() {
+            let urlInput = document.getElementById('settingSoftwareUrl');
+            let shopNameInput = document.getElementById('settingBusinessName');
+            let shopName = shopNameInput && shopNameInput.value ? shopNameInput.value : "राधा कृष्णा टेंट हाउस";
+            let url = urlInput && urlInput.value ? urlInput.value.trim() : "http://my-multi-shop.vercel.app";
+
+            let shareText = `👑 *${shopName}* \n\nकस्टमर पोर्टल पर ऑनलाइन बुकिंग करने के लिए नीचे दिए गए लिंक पर क्लिक करें:\n👉 ${url}`;
+
+            if(navigator.share) {
+                navigator.share({
+                    title: shopName,
+                    text: shareText,
+                    url: url
+                }).catch(err => console.log("Share canceled", err));
+            } else {
+                navigator.clipboard.writeText(url);
+                showActionMessage("लिंक कॉपी हो गई!", "success");
+            }
+        }
+
+        function sendWhatsAppMessage(mobileNum, messageText, bookingId = null) {
+            let cleanMob = mobileNum.replace(/\D/g, '');
+            if(cleanMob.length === 10) cleanMob = '91' + cleanMob;
+            
+            if(bookingId) {
+                let bookings = safeGetStorage('softwareBookings', []);
+                let b = bookings.find(x => x.id === bookingId);
+                if(b) {
+                    b.lastReminderDate = new Date().toISOString().slice(0,10);
+                    safeSetStorage('softwareBookings', bookings);
                 }
             }
+
+            let encodedMsg = encodeURIComponent(messageText);
+            let waUrl = `https://wa.me/${cleanMob}?text=${encodedMsg}`;
+            window.open(waUrl, '_blank');
         }
 
-        function loadThirdPartyDropdownsForDispatch() {
-            let partySelect = document.getElementById('tpDispatchPartySelect');
-            let tpList = safeGetStorage('thirdPartyDatabase', []);
-            let uniqueParties = [...new Set(tpList.map(tp => tp.partyName))];
-            if(partySelect) {
-                partySelect.innerHTML = '<option value="" disabled selected>पार्टी चुनें</option>';
-                uniqueParties.forEach(party => {
-                    partySelect.innerHTML += `<option value="${party}">${party}</option>`;
-                });
-            }
+        function checkSevenDayReminderEligibility(b) {
+            if(!b.lastReminderDate) return true;
+            let lastDate = new Date(b.lastReminderDate);
+            let today = new Date();
+            let diffDays = Math.ceil((today - lastDate) / (1000 * 60 * 60 * 24));
+            return diffDays >= 7;
         }
 
-        function populateTpItemsForParty() {
-            let partyName = document.getElementById('tpDispatchPartySelect').value;
-            let itemSelect = document.getElementById('tpDispatchItemDropdown');
-            let tpList = safeGetStorage('thirdPartyDatabase', []);
-            let partyItems = tpList.filter(tp => tp.partyName === partyName);
-
-            if(itemSelect) {
-                itemSelect.innerHTML = '<option value="" disabled selected>सामान चुनें</option>';
-                partyItems.forEach(tp => {
-                    itemSelect.innerHTML += `<option value="${tp.item}|${tp.costPrice || 400}|${tp.chargePrice || 600}">${tp.item}</option>`;
-                });
+        function saveDirectDueCustomerEntry(event) {
+            event.preventDefault();
+            let mobInput = document.getElementById('dirCustMob').value.trim();
+            let phoneRegex = /^[6-9][0-9]{9}$/;
+            if (!phoneRegex.test(mobInput)) {
+                alert("❌ अमान्य मोबाइल नंबर! कृपया सही 10 अंकों का जेन्युइन मोबाइल नंबर दर्ज करें (जो 6, 7, 8 या 9 से शुरू हो)।");
+                document.getElementById('dirCustMob').focus();
+                return;
             }
+
+            let bookings = safeGetStorage('softwareBookings', []);
+            let newId = bookings.length > 0 ? bookings[bookings.length - 1].id + 1 : 1001;
+            
+            let totalRentVal = Number(document.getElementById('dirTotalRent').value) || 0;
+            let paidAmtVal = Number(document.getElementById('dirPaidAmount').value) || 0;
+
+            let newEntry = {
+                id: newId,
+                name: document.getElementById('dirCustName').value.trim(),
+                mob: mobInput,
+                address: document.getElementById('dirCustAddress').value.trim(),
+                eventType: 'Direct Due Entry',
+                guestCount: 1,
+                date: new Date().toISOString().slice(0,10),
+                returnDate: new Date().toISOString().slice(0,10),
+                advanceAmount: paidAmtVal,
+                payMode: 'Cash',
+                items: [{ name: 'Direct Ledger Balance', qty: 1, rentPrice: totalRentVal }],
+                status: 'Completed / Delivered',
+                partPayments: [],
+                lastReminderDate: new Date().toISOString().slice(0,10)
+            };
+
+            bookings.push(newEntry);
+            safeSetStorage('softwareBookings', bookings);
+            event.target.reset();
+            showActionMessage(`डायरेक्ट ड्यू एंट्री सफलतापूर्वक सेव हुई! (ID: #${newId})`, "success");
+            loadAllFirebaseData();
+            switchTab('customer-list', document.querySelector('.menu-item[onclick*="customer-list"]'));
         }
 
         let shopClickCount = 0;
@@ -1005,6 +1180,9 @@
         }
 
         function calculateBookingTotalRent(b) {
+            if(b.eventType === 'Direct Due Entry' && b.items && b.items.length > 0) {
+                return b.items[0].rentPrice || 0;
+            }
             let days = calculateRentalDays(b.date, b.returnDate);
             let total = 0;
             if(b.items) {
@@ -1088,7 +1266,7 @@
                 let currentDateStr = `${year}-${formattedMonth}-${formattedDay}`;
 
                 let dayBookings = bookings.filter(b => {
-                    return b.date <= currentDateStr && currentDateStr <= b.returnDate;
+                    return b.eventType !== 'Direct Due Entry' && b.date <= currentDateStr && currentDateStr <= b.returnDate;
                 });
 
                 let hasBookingClass = dayBookings.length > 0 ? 'has-booking' : '';
@@ -1105,30 +1283,63 @@
 
         function saveCustomerBooking(event) {
             event.preventDefault();
+            let mobInput = document.getElementById('portalCustMob').value.trim();
+            let phoneRegex = /^[6-9][0-9]{9}$/;
+            if (!phoneRegex.test(mobInput)) {
+                alert("❌ अमान्य मोबाइल नंबर! कृपया सही 10 अंकों का जेन्युइन मोबाइल नंबर दर्ज करें (जो 6, 7, 8 या 9 से शुरू हो)।");
+                document.getElementById('portalCustMob').focus();
+                return;
+            }
+
+            let dispatchDateVal = document.getElementById('portalEventDate').value;
+            let returnDateVal = document.getElementById('portalReturnDate').value;
+            let todayStr = new Date().toISOString().slice(0, 10);
+
+            if(dispatchDateVal < todayStr) {
+                alert("❌ अमान्य डिस्पैच दिनांक! आप आज की तारीख से पहले की तारीख नहीं चुन सकते।");
+                return;
+            }
+
+            if(returnDateVal < dispatchDateVal) {
+                alert("❌ अमान्य वापसी दिनांक! वापसी की तारीख डिस्पैच तारीख से पहले नहीं हो सकती।");
+                return;
+            }
+
             let bookings = safeGetStorage('softwareBookings', []);
             let newId = bookings.length > 0 ? bookings[bookings.length - 1].id + 1 : 1001;
             
-            bookings.push({
+            let newBooking = {
                 id: newId,
                 name: document.getElementById('portalCustName').value.trim(),
-                mob: document.getElementById('portalCustMob').value.trim(),
+                mob: mobInput,
                 address: document.getElementById('portalCustAddress').value.trim(),
                 eventType: document.getElementById('portalEventType').value,
                 guestCount: Number(document.getElementById('portalGuestCount').value) || 100,
-                date: document.getElementById('portalEventDate').value,
-                returnDate: document.getElementById('portalReturnDate').value,
+                date: dispatchDateVal,
+                returnDate: returnDateVal,
                 advanceAmount: Number(document.getElementById('portalAdvanceAmount').value) || 0,
                 payMode: document.getElementById('portalPayMode').value,
                 items: [...customerCart],
                 status: 'Pending Approval',
-                partPayments: []
-            });
+                partPayments: [],
+                lastReminderDate: new Date().toISOString().slice(0,10)
+            };
 
+            bookings.push(newBooking);
             safeSetStorage('softwareBookings', bookings);
             customerCart = [];
             renderCustomerCart();
             event.target.reset();
-            alert(`बुकिंग सफलतापूर्वक सबमिट हुई! ID: #${newId} (एडमिन द्वारा कन्फर्म होने के बाद डिस्पैच में जाएगी)`);
+
+            // Reset min date after reset
+            document.getElementById('portalEventDate').min = new Date().toISOString().slice(0, 10);
+
+            let settings = safeGetStorage('softwareSettings', {});
+            let shopName = settings.businessName || "राधा कृष्णा टेंट हाउस";
+            let msg = `👑 *${shopName}* \n\nप्रिय ${newBooking.name}, आपकी बुकिंग स्वीकार कर ली गई है!\n\n🔖 *बुकिंग आईडी:* #${newBooking.id}\n🎪 *इवेंट:* ${newBooking.eventType}\n📅 *डिस्पैच दिनांक:* ${newBooking.date}\n🔄 *वापसी दिनांक:* ${newBooking.returnDate}\n💰 *एडवांस जमा:* ₹${newBooking.advanceAmount}\n\nधन्यवाद!`;
+            sendWhatsAppMessage(newBooking.mob, msg, newBooking.id);
+
+            alert(`बुकिंग सफलतापूर्वक सबमिट हुई! ID: #${newId} (WhatsApp विवरण भेज दिया गया है)`);
             loadAllFirebaseData();
         }
 
@@ -1136,7 +1347,8 @@
             let bookings = safeGetStorage('softwareBookings', []);
             let tbody = document.getElementById('bookingTableBody');
             if(tbody) {
-                tbody.innerHTML = bookings.length === 0 ? `<tr><td colspan="7" style="text-align:center;">कोई बुकिंग नहीं</td></tr>` : bookings.map(b => {
+                let actualBookings = bookings.filter(b => b.eventType !== 'Direct Due Entry');
+                tbody.innerHTML = actualBookings.length === 0 ? `<tr><td colspan="7" style="text-align:center;">कोई बुकिंग नहीं</td></tr>` : actualBookings.map(b => {
                     let confirmBtn = (b.status === 'Pending Approval' || !b.status || b.status === 'Pending') ? 
                         `<button type="button" onclick="approveBooking(${b.id})" class="action-btn" style="color:var(--emerald-neon);"><i class="fa-solid fa-check"></i> कन्फर्म करें</button>` : 
                         `<span style="color:var(--emerald-neon); font-weight:bold;">कन्फर्मड</span>`;
@@ -1168,11 +1380,22 @@
             }
         }
 
+        function deleteBooking(id) {
+            let bookings = safeGetStorage('softwareBookings', []);
+            let idx = bookings.findIndex(x => x.id === id);
+            if(idx !== -1) {
+                bookings.splice(idx, 1);
+                safeSetStorage('softwareBookings', bookings);
+                loadAllFirebaseData();
+                showActionMessage("रिकॉर्ड डिलीट हो गया", "success");
+            }
+        }
+
         function loadDispatchTable() {
             let bookings = safeGetStorage('softwareBookings', []);
             let tbody = document.getElementById('dispatchTableBody');
             if(tbody) {
-                let pending = bookings.filter(b => b.status === 'Dispatched');
+                let pending = bookings.filter(b => b.eventType !== 'Direct Due Entry' && b.status === 'Dispatched');
                 tbody.innerHTML = pending.length === 0 ? `<tr><td colspan="7" style="text-align:center;">कोई डिस्पैच पेंडिंग नहीं</td></tr>` : pending.map(b => `<tr><td>#${b.id}</td><td><b>${b.name}</b></td><td>${b.items ? b.items.map(i=>i.name).join(', ') : '-'}</td><td>1</td><td>${b.status}</td><td><button type="button" onclick="completeDispatch(${b.id})" class="action-btn" style="color:var(--emerald-neon);">पूर्ण</button></td></tr>`).join('');
             }
         }
@@ -1201,38 +1424,54 @@
                 safeSetStorage('softwareBookings', bookings);
                 safeSetStorage('realStockDatabase', stockList);
                 loadAllFirebaseData();
-                showActionMessage("डिस्पैच पूर्ण व स्टॉक लॉक्ड", "success");
+
+                let settings = safeGetStorage('softwareSettings', {});
+                let shopName = settings.businessName || "राधा कृष्णा टेंट हाउस";
+                let itemsListStr = b.items ? b.items.map(i => `• ${i.name} (${i.qty} पीस)`).join('\n') : '';
+                let msg = `🚚 *${shopName} - डिस्पैच स्लिप*\n\nप्रिय ${b.name}, आपकी बुकिंग #${b.id} का सामान डिस्पैच कर दिया गया है:\n\n${itemsListStr}\n\nदिनांक: ${b.date} से ${b.returnDate}\n\nधन्यवाद!`;
+                sendWhatsAppMessage(b.mob, msg, b.id);
+
+                showActionMessage("डिस्पैच पूर्ण व WhatsApp स्लिप भेजी गई", "success");
             }
         }
 
-        function addItemToPendingBookingDispatch() {
-            let searchId = document.getElementById('dispatchSearchId').value.trim();
-            let itemName = document.getElementById('adminAddStockSelect').value;
-            let qty = Number(document.getElementById('adminAddStockQty').value) || 1;
-            if(!searchId || !itemName) { showActionMessage("बुकिंग आईडी और सामान चुनें!", "error"); return; }
+        function completeManualReturnProcess() {
+            let rows = document.querySelectorAll('.return-item-row');
+            if(rows.length === 0) { showActionMessage("कोई सामान लोड नहीं है!", "error"); return; }
+            
+            let missingDetails = [];
+            let stockList = safeGetStorage('realStockDatabase', []);
+            
+            rows.forEach(row => {
+                let itemName = row.getAttribute('data-item-name');
+                let givenQty = Number(row.getAttribute('data-given-qty'));
+                let returnedQty = Number(row.querySelector('.return-qty-input').value) || 0;
+                let missingQty = Math.max(0, givenQty - returnedQty);
 
-            let bookings = safeGetStorage('softwareBookings', []);
-            let b = bookings.find(x => x.id.toString() === searchId);
-            if(b) {
-                if(!b.items) b.items = [];
-                b.items.push({ name: itemName, qty: qty, rentPrice: 500 });
-                safeSetStorage('softwareBookings', bookings);
-                loadDispatchTable();
-                showActionMessage("सामान आर्डर में जोड़ा गया", "success");
-            } else {
-                showActionMessage("बुकिंग नहीं मिली!", "error");
-            }
-        }
+                if(missingQty > 0) {
+                    missingDetails.push({ name: itemName, missing: missingQty });
+                }
 
-        function loadStockDropdowns() {
-            let stock = safeGetStorage('realStockDatabase', []);
-            ['portalStockSelect', 'adminAddStockSelect'].forEach(id => {
-                let sel = document.getElementById(id);
-                if(sel) {
-                    sel.innerHTML = '<option value="" disabled selected>सामान चुनें</option>';
-                    stock.forEach(s => { sel.innerHTML += `<option value="${s.name}">${s.name} (उपलब्ध: ${s.qty})</option>`; });
+                let stockItem = stockList.find(s => s.name === itemName);
+                if(stockItem) {
+                    stockItem.qty += returnedQty;
                 }
             });
+
+            safeSetStorage('realStockDatabase', stockList);
+            loadAllFirebaseData();
+
+            let currentRetBooking = window.currentReturnBooking;
+            if(currentRetBooking) {
+                let settings = safeGetStorage('softwareSettings', {});
+                let shopName = settings.businessName || "राधा कृष्णा टेंट हाउस";
+                let missingStr = missingDetails.length > 0 ? missingDetails.map(m => `⚠️ ${m.name}: ${m.missing} पीस कम`).join('\n') : '✅ सभी सामान सही सलामत प्राप्त हुए।';
+                let msg = `🔄 *${shopName} - रिटर्न व मिसिंग रिपोर्ट*\n\nप्रिय ${currentRetBooking.name}, आपकी बुकिंग #${currentRetBooking.id} की सामान वापसी (Return) पूर्ण हो गई है:\n\n${missingStr}\n\nधन्यवाद!`;
+                sendWhatsAppMessage(currentRetBooking.mob, msg, currentRetBooking.id);
+            }
+
+            document.getElementById('returnManualCountingSection').style.display = 'none';
+            showActionMessage("सामान वापसी पूर्ण व WhatsApp स्लिप भेजी गई", "success");
         }
 
         function addSelectedItemToCart() {
@@ -1332,19 +1571,45 @@
         function loadCustomerList() {
             let bookings = safeGetStorage('softwareBookings', []);
             let tbody = document.getElementById('customerTableBody');
+            let settings = safeGetStorage('softwareSettings', {});
+            let shopName = settings.businessName || "राधा कृष्णा टेंट हाउस";
+
             if(tbody) {
-                tbody.innerHTML = bookings.length === 0 ? `<tr><td colspan="8" style="text-align:center;">कोई रिकॉर्ड नहीं</td></tr>` : bookings.map(b => {
+                tbody.innerHTML = bookings.length === 0 ? `<tr><td colspan="9" style="text-align:center;">कोई रिकॉर्ड नहीं</td></tr>` : bookings.map(b => {
                     let totalRent = calculateBookingTotalRent(b);
                     let paidAmt = (b.advanceAmount || 0);
                     let balanceDue = totalRent - paidAmt;
+                    
+                    let reminderBtn = '';
+                    if(balanceDue > 0) {
+                        let isEligible = checkSevenDayReminderEligibility(b);
+                        let btnColor = isEligible ? 'var(--amber-neon)' : 'var(--text-muted)';
+                        let btnText = isEligible ? '🔔 7-दिन रिमाइंडर भेजें' : '⏳ रिमाइंडर भेजा गया';
+                        
+                        let reminderMsg = `⚠️ *${shopName} - भुगतान रिमाइंडर*\n\nप्रिय ${b.name}, आपकी बुकिंग/खाता #${b.id} का कुल बकाया बैलेंस *₹${balanceDue}* बाकी है। कृपया इसे जल्द से जल्द जमा करें।\n\nधन्यवाद!`;
+                        
+                        reminderBtn = `<button type="button" onclick="sendWhatsAppMessage('${b.mob}', '${reminderMsg}', ${b.id}); loadCustomerList();" class="action-btn" style="color:${btnColor};">${btnText}</button>`;
+                    } else {
+                        reminderBtn = `<span style="color:var(--emerald-neon); font-weight:bold;">क्लीयर (0 ड्यू)</span>`;
+                    }
+
                     return `<tr>
                         <td><b>${b.name}</b></td>
-                        <td>${b.mob}</td>
+                        <td>
+                            <a href="tel:${b.mob}" style="text-decoration:none; color:var(--emerald-neon); font-weight:800; background:#d1fae5; padding:4px 8px; border-radius:8px; display:inline-flex; align-items:center; gap:4px;">
+                                <i class="fa-solid fa-phone"></i> ${b.mob}
+                            </a>
+                        </td>
                         <td>${b.address}</td>
                         <td>₹${totalRent}</td>
                         <td>₹${paidAmt}</td>
-                        <td style="color:#e53e3e;">₹${balanceDue}</td>
-                        <td><button type="button" onclick="openPaymentHistory(${b.id})" class="action-btn" style="color:#805ad5;"><i class="fa-solid fa-list"></i> हिस्ट्री</button></td>
+                        <td style="color:#e53e3e; font-weight:800;">₹${balanceDue}</td>
+                        <td>${reminderBtn}</td>
+                        <td>
+                            <button type="button" onclick="sendWhatsAppMessage('${b.mob}', 'नमस्ते ${b.name}, ${shopName} से आपके खाते #${b.id} के संबंध में संपर्क किया जा रहा है।')" class="action-btn" style="color:var(--emerald-neon);">
+                                <i class="fa-brands fa-whatsapp"></i> चैट
+                            </button>
+                        </td>
                         <td><button type="button" onclick="deleteBooking(${b.id})" class="action-btn" style="color:#e53e3e;"><i class="fa-solid fa-trash"></i></button></td>
                     </tr>`;
                 }).join('');
@@ -1411,7 +1676,30 @@
             showActionMessage("डिलीट हो गया", "success");
         }
 
-        function searchBillingCustomer() {}
+        function searchBillingCustomer() {
+            let searchId = document.getElementById('billSearchInput').value.trim();
+            let bookings = safeGetStorage('softwareBookings', []);
+            let b = bookings.find(x => x.id.toString() === searchId);
+            let tbody = document.getElementById('billItemsTableBody');
+            if(!tbody) return;
+
+            if(b) {
+                let days = calculateRentalDays(b.date, b.returnDate);
+                tbody.innerHTML = b.items ? b.items.map((i, idx) => {
+                    let amt = b.eventType === 'Direct Due Entry' ? i.rentPrice : i.qty * (i.rentPrice || 500) * days;
+                    return `<tr><td>${idx+1}</td><td>${i.name}</td><td>${i.qty}</td><td>${b.eventType === 'Direct Due Entry' ? '1' : days} दिन</td><td>₹${i.rentPrice || 500}</td><td>₹${amt}</td></tr>`;
+                }).join('') : `<tr><td colspan="6" style="text-align:center;">कोई सामान नहीं</td></tr>`;
+
+                let settings = safeGetStorage('softwareSettings', {});
+                let shopName = settings.businessName || "राधा कृष्णा टेंट हाउस";
+                let total = calculateBookingTotalRent(b);
+                let msg = `🧾 *${shopName} - फाइनल बिल*\n\nप्रिय ${b.name}, आपकी बुकिंग #${b.id} का फाइनल बिल तैयार है:\n\n कुल देय राशि: ₹${total}\n एडवांस जमा: ₹${b.advanceAmount || 0}\n शेष राशि: ₹${total - (b.advanceAmount || 0)}\n\nधन्यवाद!`;
+                sendWhatsAppMessage(b.mob, msg, b.id);
+                showActionMessage("बिल खोजा गया और WhatsApp पर भेजा गया", "success");
+            } else {
+                tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:#e53e3e;">बुकिंग नहीं मिली!</td></tr>`;
+            }
+        }
 
         function saveSettings(event) {
             event.preventDefault();
@@ -1421,6 +1709,8 @@
             settings.contactNo = document.getElementById('settingContactNo').value.trim();
             settings.logoUrl = document.getElementById('settingLogoUrl').value.trim();
             settings.defaultGst = Number(document.getElementById('settingDefaultGst').value) || 18;
+            settings.waPhoneId = document.getElementById('settingWaPhoneId').value.trim();
+            settings.waToken = document.getElementById('settingWaToken').value.trim();
             let pass = document.getElementById('settingAdminPass').value.trim();
             if(pass) settings.adminPass = pass;
             safeSetStorage('softwareSettings', settings);
@@ -1435,8 +1725,22 @@
                 document.getElementById('settingBusinessName').value = shopName;
                 document.getElementById('settingDeveloperName').value = s.developerName || "SHARD PATEL";
                 document.getElementById('settingContactNo').value = s.contactNo || "8120727987";
-                document.getElementById('settingLogoUrl').value = s.logoUrl || "";
+                let logoVal = s.logoUrl || "";
+                document.getElementById('settingLogoUrl').value = logoVal;
+                if(logoVal) {
+                    let previewImg = document.getElementById('logoPreviewImg');
+                    let previewContainer = document.getElementById('logoPreviewContainer');
+                    if(previewImg && previewContainer) {
+                        previewImg.src = logoVal;
+                        previewContainer.style.display = 'block';
+                    }
+                }
                 if(document.getElementById('settingDefaultGst')) document.getElementById('settingDefaultGst').value = s.defaultGst || 18;
+                if(document.getElementById('settingWaPhoneId')) document.getElementById('settingWaPhoneId').value = s.waPhoneId || "";
+                if(document.getElementById('settingWaToken')) document.getElementById('settingWaToken').value = s.waToken || "";
+                let urlInput = document.getElementById('settingSoftwareUrl');
+                if(urlInput && !urlInput.value) urlInput.value = "http://my-multi-shop.vercel.app";
+                if(urlInput) generatePortalQrCode(urlInput.value);
             }
             if(document.getElementById('displayShopName')) document.getElementById('displayShopName').textContent = shopName;
             if(document.getElementById('overlayShopName')) document.getElementById('overlayShopName').textContent = shopName;

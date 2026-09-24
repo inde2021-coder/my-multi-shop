@@ -44,13 +44,70 @@
         #actionToast.success { color: var(--emerald-neon); }
         #actionToast.error { color: #f43f5e; }
 
-        .welcome-card, .glass-card-blue, .glass-card-green, .glass-card-purple {
+        /* STRICT INSET FOR ALL CARDS & CONTAINERS */
+        .welcome-card, .glass-card-blue, .glass-card-green, .glass-card-purple, .settings-section-card {
             background: #e4ebf5 !important; border-radius: 24px; padding: 16px 20px; margin-bottom: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            box-shadow: 8px 8px 16px rgba(163, 177, 198, 0.5), -8px -8px 16px rgba(255, 255, 255, 0.8) !important;
+            border: 1px solid rgba(255, 255, 255, 0.9) !important;
+            box-shadow: inset 7px 7px 15px rgba(163, 177, 198, 0.75), inset -7px -7px 15px rgba(255, 255, 255, 1) !important;
         }
 
-        .settings-section-card { background: #e4ebf5; border-radius: 20px; margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.8); box-shadow: 6px 6px 12px rgba(163,177,198,0.5), -6px -6px 12px rgba(255,255,255,0.8); overflow: hidden; }
+        /* STRICT INSET FOR ALL INPUT FIELDS, TEXTAREAS & SELECTS */
+        input[type="text"], input[type="password"], input[type="tel"], input[type="number"], input[type="date"], select {
+            width: 100% !important; padding: 12px 16px !important; background: #e4ebf5 !important;
+            border: 1px solid rgba(255,255,255,0.6) !important; border-radius: 16px !important; font-size: 14px !important;
+            font-weight: 700 !important; color: #1e3a8a !important; outline: none !important; margin-bottom: 8px;
+            -webkit-appearance: none !important; -moz-appearance: none !important; appearance: none !important;
+            box-shadow: inset 6px 6px 12px rgba(163, 177, 198, 0.85), inset -6px -6px 12px rgba(255, 255, 255, 1) !important;
+            background-clip: padding-box !important;
+        }
+
+        textarea {
+            width: 100% !important; min-height: 95px !important; height: auto !important; padding: 12px 16px !important; background: #e4ebf5 !important;
+            border: 1px solid rgba(255,255,255,0.6) !important; border-radius: 16px !important; font-size: 14px !important;
+            font-weight: 700 !important; color: #1e3a8a !important; outline: none !important; margin-bottom: 8px;
+            -webkit-appearance: none !important; -moz-appearance: none !important; appearance: none !important;
+            box-shadow: inset 6px 6px 12px rgba(163, 177, 198, 0.85), inset -6px -6px 12px rgba(255, 255, 255, 1) !important;
+            resize: vertical !important;
+        }
+
+        input::placeholder, textarea::placeholder { color: #829ab1 !important; font-weight: 500 !important; opacity: 1 !important; }
+
+        select {
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232b6cb0'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E") !important;
+            background-repeat: no-repeat !important; background-position: right 12px center !important; background-size: 22px !important;
+            cursor: pointer;
+        }
+
+        /* 1000-Crore Ultra Luxury Dashboard Report Styling */
+        .billion-stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; margin-bottom: 20px; }
+        .billion-stat-card { background: #e4ebf5; border-radius: 24px; padding: 22px; border: 1px solid rgba(255,255,255,0.95); box-shadow: inset 6px 6px 14px rgba(163,177,198,0.65), inset -6px -6px 14px rgba(255,255,255,0.95) !important; position: relative; display: flex; align-items: center; gap: 18px; }
+        .billion-stat-icon { width: 60px; height: 60px; border-radius: 20px; background: linear-gradient(135deg, #2b6cb0, #00f2fe); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 26px; box-shadow: 5px 5px 15px rgba(43,108,176,0.45); }
+        .billion-stat-card.green .billion-stat-icon { background: linear-gradient(135deg, #047857, #10b981); }
+        .billion-stat-card.amber .billion-stat-icon { background: linear-gradient(135deg, #d97706, #fbbf24); }
+        .billion-stat-card.pink .billion-stat-icon { background: linear-gradient(135deg, #be185d, #ec4899); }
+
+        /* DASHBOARD ENTERPRISE HUB GRID */
+        .dash-hub-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-top: 15px; }
+        .dash-hub-btn { background: #e4ebf5; border-radius: 18px; padding: 15px; text-align: center; cursor: pointer; border: 1px solid rgba(255,255,255,0.9); box-shadow: 6px 6px 12px rgba(163, 177, 198, 0.6), -6px -6px 12px rgba(255, 255, 255, 0.9); transition: all 0.2s ease; display: flex; flex-direction: column; align-items: center; gap: 8px; font-weight: 700; color: var(--primary-blue); font-size: 13px; }
+        .dash-hub-btn:active { box-shadow: inset 4px 4px 8px rgba(163, 177, 198, 0.7), inset -4px -4px 8px rgba(255, 255, 255, 0.9); transform: translateY(1px); }
+        .dash-hub-btn i { font-size: 22px; color: var(--primary-blue); }
+
+        /* STRICT OUTSET FOR ALL BUTTONS */
+        .glass-btn-blue, .glass-btn-cyan, .glass-btn-green, .action-btn, button[type="submit"], button[type="button"] {
+            background: linear-gradient(135deg, #00f2fe 0%, #2b6cb0 100%) !important;
+            color: #ffffff !important; font-weight: 800 !important; border-radius: 16px; padding: 12px; cursor: pointer; border: none;
+            box-shadow: 6px 6px 14px rgba(163, 177, 198, 0.75), -6px -6px 14px rgba(255, 255, 255, 0.95), inset 0 2px 3px rgba(255,255,255,0.8) !important;
+            position: relative; overflow: hidden; margin-top: 4px; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            transition: all 0.2s ease;
+        }
+        .glass-btn-blue:active, .glass-btn-cyan:active, .glass-btn-green:active, .action-btn:active {
+            box-shadow: inset 3px 3px 6px rgba(163, 177, 198, 0.8), inset -3px -3px 6px rgba(255, 255, 255, 0.95) !important;
+            transform: translateY(1px);
+        }
+        .glass-btn-cyan { background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%) !important; }
+        .glass-btn-green { background: linear-gradient(135deg, #10b981 0%, #047857 100%) !important; }
+        .action-btn { padding: 7px 14px !important; font-size: 11.5px !important; background: #e4ebf5 !important; color: var(--amber-neon) !important; box-shadow: 5px 5px 10px rgba(163,177,198,0.65), -5px -5px 10px rgba(255,255,255,0.95) !important; }
+
         .settings-section-header { padding: 14px 18px; font-size: 14px; font-weight: 800; color: var(--primary-blue); display: flex; justify-content: space-between; align-items: center; cursor: pointer; background: rgba(228,235,245,0.8); user-select: none; }
         .settings-section-header:hover { background: rgba(219,234,254,0.5); }
         .settings-section-body { padding: 16px 18px; display: none; border-top: 1px solid rgba(255,255,255,0.5); }
@@ -62,55 +119,17 @@
         .table-lamp-shade { width: 85px; height: 45px; background: linear-gradient(135deg, #2b6cb0, #1a365d); clip-path: polygon(15% 0%, 85% 0%, 100% 100%, 0% 100%); border-radius: 6px; position: relative; display: flex; justify-content: center; }
         .table-lamp-bulb { position: absolute; bottom: 4px; width: 18px; height: 18px; background: #ffffff; border-radius: 50%; cursor: pointer; box-shadow: 0 0 15px #ffffff, 0 0 25px #00f0ff; z-index: 20; }
 
-        input[type="text"], input[type="password"], input[type="tel"], input[type="number"], input[type="date"], textarea {
-            width: 100% !important; padding: 12px 16px !important; background: #e4ebf5 !important;
-            border: 1px solid rgba(255,255,255,0.4) !important; border-radius: 16px !important; font-size: 14px !important;
-            font-weight: 700 !important; color: #1e3a8a !important; outline: none !important; margin-bottom: 8px;
-            -webkit-appearance: none !important; -moz-appearance: none !important; appearance: none !important;
-            box-shadow: inset 4px 4px 8px rgba(163, 177, 198, 0.75), inset -4px -4px 8px rgba(255, 255, 255, 0.95) !important;
-            background-clip: padding-box !important;
-            transition: all 0.3s ease;
-        }
-
-        select {
-            width: 100% !important; padding: 12px 40px 12px 16px !important; background: #e4ebf5 !important;
-            border: 1px solid rgba(255,255,255,0.4) !important; border-radius: 16px !important; font-size: 14px !important;
-            font-weight: 700 !important; color: #1e3a8a !important; outline: none !important; margin-bottom: 8px;
-            -webkit-appearance: none !important; -moz-appearance: none !important; appearance: none !important;
-            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232b6cb0'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E") !important;
-            background-repeat: no-repeat !important; background-position: right 12px center !important; background-size: 22px !important;
-            box-shadow: inset 4px 4px 8px rgba(163, 177, 198, 0.75), inset -4px -4px 8px rgba(255, 255, 255, 0.95) !important;
-            background-clip: padding-box !important;
-            cursor: pointer;
-        }
-
-        input:focus, select:focus, textarea:focus {
-            box-shadow: inset 2px 2px 5px rgba(163, 177, 198, 0.9), inset -2px -2px 5px rgba(255, 255, 255, 0.95), 0 0 8px rgba(0,242,254,0.4) !important;
-        }
-
-        input::placeholder, textarea::placeholder { color: #829ab1 !important; font-weight: 500 !important; }
-
-        .glass-btn-blue, .glass-btn-cyan, .glass-btn-green {
-            background: linear-gradient(135deg, #00f2fe 0%, #2b6cb0 100%) !important;
-            color: #ffffff !important; font-weight: 800 !important; border-radius: 16px; padding: 12px; width: 100%; cursor: pointer; border: none;
-            box-shadow: 6px 6px 12px rgba(163, 177, 198, 0.5), -6px -6px 12px rgba(255, 255, 255, 0.8), inset 0 2px 3px rgba(255,255,255,0.7) !important;
-            position: relative; overflow: hidden; margin-top: 4px; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-        }
-        .glass-btn-cyan { background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%) !important; }
-        .glass-btn-green { background: linear-gradient(135deg, #10b981 0%, #047857 100%) !important; }
-        
-        .action-btn { padding: 7px 14px !important; border-radius: 12px !important; font-size: 11.5px !important; background: #e4ebf5; border: none; cursor: pointer; font-weight: 700; color: var(--amber-neon); box-shadow: 4px 4px 8px rgba(163,177,198,0.5), -4px -4px 8px rgba(255,255,255,0.8); display: inline-flex; align-items: center; gap: 5px; }
-
-        .table-responsive { width: 100%; max-height: 360px; overflow-x: auto; overflow-y: auto; background: #e4ebf5 !important; border-radius: 16px !important; margin-top: 10px; margin-bottom: 20px; padding: 10px; box-shadow: inset 3px 3px 6px rgba(163,177,198,0.6), inset -3px -3px 6px rgba(255,255,255,0.95) !important; }
+        /* FIXED TABLE STYLING TO PREVENT DATA OVERLAPPING BEHIND HEADERS */
+        .table-responsive { width: 100%; max-height: 360px; overflow-x: auto; overflow-y: auto; background: #e4ebf5 !important; border-radius: 16px !important; margin-top: 10px; margin-bottom: 20px; padding: 10px; box-shadow: inset 5px 5px 12px rgba(163,177,198,0.75), inset -5px -5px 12px rgba(255,255,255,1) !important; position: relative; }
         table { width: 100%; border-collapse: collapse; }
-        th, td { padding: 10px 14px; text-align: left; font-size: 12.5px; font-weight: 600; color: var(--text-main); white-space: nowrap; }
-        th { position: sticky; top: 0; background: #dbeafe !important; color: var(--primary-blue); z-index: 2; }
+        th, td { padding: 12px 14px; text-align: left; font-size: 12.5px; font-weight: 600; color: var(--text-main); white-space: nowrap; }
+        th { position: sticky !important; top: 0 !important; background: #cbd5e1 !important; color: #1e3a8a !important; z-index: 10 !important; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
 
-        /* Calendar Grid Styles */
         .calendar-grid-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
         .calendar-weekdays { display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; font-weight: 800; color: var(--primary-blue); font-size: 13px; margin-bottom: 8px; }
         .calendar-days-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
-        .calendar-day-cell { background: #e4ebf5; min-height: 75px; border-radius: 12px; padding: 6px; box-shadow: 3px 3px 6px rgba(163,177,198,0.5), -3px -3px 6px rgba(255,255,255,0.8); display: flex; flex-direction: column; justify-content: flex-start; font-size: 12px; }
+        .calendar-day-cell { background: #e4ebf5; min-height: 75px; border-radius: 12px; padding: 6px; box-shadow: inset 3px 3px 6px rgba(163,177,198,0.5), inset -3px -3px 6px rgba(255,255,255,0.9); display: flex; flex-direction: column; justify-content: flex-start; font-size: 12px; cursor: pointer; transition: 0.2s; }
+        .calendar-day-cell:hover { background: #dbeafe; }
         .calendar-day-cell.has-booking { background: #dbeafe; border: 1px solid var(--primary-blue); }
         .calendar-day-number { font-weight: 800; color: var(--text-muted); margin-bottom: 4px; }
         .calendar-day-cell.has-booking .calendar-day-number { color: var(--primary-blue); }
@@ -130,15 +149,15 @@
             .sidebar.mobile-show { transform: translateX(0); }
         }
 
-        .sidebar-brand { font-size: 14px; font-weight: 800; padding: 12px 14px; color: var(--primary-blue); display: flex; flex-direction: column; margin: 8px 10px; border-radius: 14px; background: #e4ebf5; box-shadow: 5px 5px 10px rgba(163,177,198,0.5), -5px -5px 10px rgba(255,255,255,0.8); }
-        .menu-item { padding: 10px 14px; margin-bottom: 6px; border-radius: 12px; cursor: pointer; font-size: 13px; font-weight: 700; text-align: left; display: flex; align-items: center; gap: 10px; background: #e4ebf5; color: var(--text-muted); transition: 0.2s; box-shadow: 3px 3px 6px rgba(163,177,198,0.4), -3px -3px 6px rgba(255,255,255,0.8); }
+        .sidebar-brand { font-size: 14px; font-weight: 800; padding: 12px 14px; color: var(--primary-blue); display: flex; flex-direction: column; margin: 8px 10px; border-radius: 14px; background: #e4ebf5; box-shadow: inset 4px 4px 8px rgba(163,177,198,0.6), inset -4px -4px 8px rgba(255,255,255,0.95); }
+        .menu-item { padding: 10px 14px; margin-bottom: 6px; border-radius: 12px; cursor: pointer; font-size: 13px; font-weight: 700; text-align: left; display: flex; align-items: center; gap: 10px; background: #e4ebf5; color: var(--text-muted); transition: 0.2s; box-shadow: inset 3px 3px 6px rgba(163,177,198,0.5), inset -3px -3px 6px rgba(255,255,255,0.9); }
         .menu-item:hover { color: var(--cyan-neon); }
-        .menu-item.active { background: linear-gradient(135deg, #2b6cb0, #1a365d); color: #fff; font-weight: 800; box-shadow: inset 2px 2px 5px rgba(0,0,0,0.3); }
+        .menu-item.active { background: linear-gradient(135deg, #2b6cb0, #1a365d); color: #fff; font-weight: 800; box-shadow: inset 2px 2px 5px rgba(0,0,0,0.4); }
         .menu-item i { width: 18px; text-align: center; }
         
         .main-content { flex: 1; display: flex; flex-direction: column; overflow: hidden; background: transparent; }
         .header { height: 55px; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; border-bottom: 1px solid rgba(255,255,255,0.4); }
-        .mobile-toggle-btn { background: #2b6cb0; color: #fff; border: none; padding: 6px 10px; border-radius: 8px; font-size: 15px; cursor: pointer; display: none; box-shadow: 3px 3px 6px rgba(163,177,198,0.4); }
+        .mobile-toggle-btn { background: #2b6cb0; color: #fff; border: none; padding: 6px 10px; border-radius: 8px; font-size: 15px; cursor: pointer; display: none; box-shadow: 4px 4px 8px rgba(163,177,198,0.6); }
         @media(max-width: 768px) { .mobile-toggle-btn { display: inline-block; } }
 
         .content-body { flex: 1; padding: 18px; padding-bottom: 80px; overflow-y: auto; }
@@ -149,15 +168,15 @@
         label { color: var(--primary-blue); font-size: 12px; font-weight: 700; display: flex; align-items: center; gap: 6px; margin-bottom: 3px; }
         
         .dev-footer { text-align: center; padding: 15px 0 5px; font-size: 12px; color: var(--text-muted); font-weight: 600; }
-        .dev-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; background: #e4ebf5; border-radius: 12px; box-shadow: 4px 4px 8px rgba(163,177,198,0.5), -4px -4px 8px rgba(255,255,255,0.8); color: var(--primary-blue); font-weight: 700; text-decoration: none; margin-top: 4px; }
+        .dev-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; background: #e4ebf5; border-radius: 12px; box-shadow: inset 3px 3px 6px rgba(163,177,198,0.5), inset -3px -3px 6px rgba(255,255,255,0.9); color: var(--primary-blue); font-weight: 700; text-decoration: none; margin-top: 4px; }
     </style>
 </head>
-<body>
+<body onclick="handleGlobalBodyClick(event)">
 
     <div id="actionToast"></div>
 
     <div id="welcomeOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(12px); justify-content: center; align-items: center; z-index: 999999;">
-        <div class="welcome-card" style="max-width: 380px;">
+        <div class="welcome-card" style="max-width: 380px;" onclick="event.stopPropagation()">
             <div class="table-lamp-container">
                 <div class="table-lamp-shade">
                     <div id="mainBulb" class="table-lamp-bulb" onclick="cycleLampColor(event)"></div>
@@ -169,7 +188,7 @@
             <h1 style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 22px; font-weight: 800; color: var(--primary-blue); margin-bottom: 14px; white-space: nowrap; text-align: center;"><i class="fa-solid fa-tent"></i> राधा कृष्णा टेंट हाउस</h1>
             
             <form onsubmit="handleDirectAdminLogin(event)" style="display: flex; flex-direction: column; gap: 8px;">
-                <input type="password" id="realAdminPass" placeholder="Enter Password (8120727987)" required value="">
+                <input type="password" id="realAdminPass" placeholder="गुप्त पासवर्ड दर्ज करें" required value="">
                 <button type="submit" class="glass-btn-blue"><i class="fa-solid fa-unlock-keyhole"></i> एडमिन पैनल खोलें</button>
             </form>
 
@@ -177,58 +196,29 @@
         </div>
     </div>
 
+    <!-- Calendar Booking Details Modal -->
+    <div id="calendarDetailsModal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(12px); display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 999999; padding: 20px;">
+        <div class="welcome-card" style="max-width: 450px; width:100%; background:#fff !important;" onclick="event.stopPropagation()">
+            <h3 style="color: var(--primary-blue); font-size: 16px; margin-bottom: 10px;"><i class="fa-solid fa-calendar-check"></i> इस तारीख की बुकिंग डिटेल्स</h3>
+            <div id="calendarModalContentBox" style="max-height: 280px; overflow-y: auto; margin-bottom: 12px; font-size: 13px;"></div>
+            <button type="button" onclick="closeCalendarDetailsModal()" class="action-btn" style="color: #e53e3e; width:100%; justify-content:center;"><i class="fa-solid fa-xmark"></i> बंद करें</button>
+        </div>
+    </div>
+
     <div id="masterLedgerAuthOverlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(12px); display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 999999; padding: 20px;">
-        <div class="welcome-card" style="max-width: 380px;">
+        <div class="welcome-card" style="max-width: 380px;" onclick="event.stopPropagation()">
             <h2 style="color: var(--primary-blue); font-size: 18px; font-weight: 800; margin-bottom: 12px;"><i class="fa-solid fa-shield-halved"></i> मास्टर लेज़र सुरक्षा</h2>
             <form onsubmit="verifyMasterLedgerPassword(event)" style="display: flex; flex-direction: column; gap: 8px;">
-                <input type="password" id="ledgerAdminPass" placeholder="पासवर्ड दर्ज करें" required value="">
+                <input type="password" id="ledgerAdminPass" placeholder="मास्टर पासवर्ड दर्ज करें" required value="">
                 <button type="submit" class="glass-btn-blue"><i class="fa-solid fa-key"></i> लेज़र खोलें</button>
             </form>
             <button type="button" onclick="closeMasterLedgerAuth()" class="action-btn" style="color: #e53e3e; margin-top: 10px; width:100%; justify-content:center;"><i class="fa-solid fa-xmark"></i> बंद करें</button>
         </div>
     </div>
 
-    <div id="firebaseAuthModal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(12px); display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 999999; padding: 20px;">
-        <div class="welcome-card" style="max-width: 380px; width: 100%;">
-            <h3 style="color: var(--primary-blue); font-size: 16px; margin-bottom: 8px;"><i class="fa-solid fa-lock"></i> Firebase सुरक्षा सत्यापन</h3>
-            <form onsubmit="verifyFirebasePassword(event)" style="display: flex; flex-direction: column; gap: 8px;">
-                <input type="password" id="firebaseAuthPassInput" placeholder="पासवर्ड दर्ज करें" required value="">
-                <button type="submit" class="glass-btn-blue" style="margin-top:4px;"><i class="fa-solid fa-check"></i> सत्यापित करें</button>
-            </form>
-            <button type="button" onclick="closeFirebaseModal()" class="action-btn" style="color: #e53e3e; margin-top: 10px; width:100%; justify-content:center;"><i class="fa-solid fa-xmark"></i> रद्द करें</button>
-        </div>
-    </div>
-
-    <div id="installmentModal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(12px); display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 999999; padding: 20px;">
-        <div class="welcome-card" style="max-width: 380px; width:100%;">
-            <h3 style="color: var(--primary-blue); font-size: 16px; margin-bottom: 8px;"><i class="fa-solid fa-wallet"></i> बकाया भुगतान</h3>
-            <form onsubmit="savePartialPayment(event)" style="display: flex; flex-direction: column; gap: 8px;">
-                <input type="hidden" id="instBookingId">
-                <div><label><i class="fa-solid fa-hashtag"></i> बुकिंग आईडी: <span id="instBookingIdDisplay" style="color:var(--emerald-neon);"></span></label></div>
-                <div><label><i class="fa-solid fa-indian-rupee-sign"></i> राशि (₹)</label><input type="number" id="instAmount" min="1" required placeholder="रुपये दर्ज करें" style="margin-bottom:0;" value=""></div>
-                <button type="submit" class="glass-btn-green" style="margin-top:6px;"><i class="fa-solid fa-circle-check"></i> भुगतान दर्ज करें</button>
-            </form>
-            <button type="button" onclick="closeInstallmentModal()" class="action-btn" style="color: #e53e3e; margin-top: 10px; width:100%; justify-content:center;"><i class="fa-solid fa-xmark"></i> बंद करें</button>
-        </div>
-    </div>
-
-    <!-- Part Payment History Modal -->
-    <div id="paymentHistoryModal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(12px); display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 999999; padding: 20px;">
-        <div class="welcome-card" style="max-width: 420px; width:100%;">
-            <h3 style="color: var(--primary-blue); font-size: 16px; margin-bottom: 10px;"><i class="fa-solid fa-clock-rotate-left"></i> किश्त भुगतान हिस्ट्री</h3>
-            <div class="table-responsive" style="max-height: 200px; margin-bottom: 10px;">
-                <table>
-                    <thead><tr><th>दिनांक</th><th>विवरण</th><th>राशि</th></tr></thead>
-                    <tbody id="paymentHistoryTableBody"><tr><td colspan="3" style="text-align:center;">कोई किश्त नहीं</td></tr></tbody>
-                </table>
-            </div>
-            <button type="button" onclick="closePaymentHistoryModal()" class="action-btn" style="color: #e53e3e; width:100%; justify-content:center;"><i class="fa-solid fa-xmark"></i> बंद करें</button>
-        </div>
-    </div>
-
     <!-- Barcode Print Modal -->
     <div id="barcodePrintModal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(12px); display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 999999; padding: 20px;">
-        <div class="welcome-card" style="max-width: 320px; text-align: center; background: #fff !important;">
+        <div class="welcome-card" style="max-width: 320px; text-align: center; background: #fff !important;" onclick="event.stopPropagation()">
             <h3 style="color: var(--primary-blue); font-size: 16px; margin-bottom: 10px;">🏷️ Item Barcode</h3>
             <p id="printItemName" style="font-weight: 800; margin-bottom: 10px; font-size: 14px;"></p>
             <div style="background: #fff; padding: 15px; display: inline-block; border-radius: 8px; border: 1px dashed #cbd5e1;">
@@ -243,7 +233,7 @@
 
     <!-- Smart Barcode / Tag Scanner Modal -->
     <div id="aiScannerModal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(12px); display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 999999; padding: 20px;">
-        <div class="welcome-card" style="max-width: 400px; text-align: center; background: #fff !important;">
+        <div class="welcome-card" style="max-width: 400px; text-align: center; background: #fff !important;" onclick="event.stopPropagation()">
             <h3 style="color: var(--primary-blue); font-size: 16px; margin-bottom: 6px;"><i class="fa-solid fa-barcode"></i> स्मार्ट बारकोड / टैग स्कैनर</h3>
             <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 10px;">सामान के बारकोड या नाम टैग को कैमरे के सामने लाएं:</p>
             
@@ -263,23 +253,6 @@
         </div>
     </div>
 
-    <!-- Edit Third Party Modal -->
-    <div id="editThirdPartyModal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(12px); display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 999999; padding: 20px;">
-        <div class="welcome-card" style="max-width: 380px; width: 100%;">
-            <h3 style="color: var(--primary-blue); font-size: 16px; margin-bottom: 8px;"><i class="fa-solid fa-pen-to-square"></i> थर्ड-पार्टी एंट्री अपडेट करें</h3>
-            <form onsubmit="updateThirdPartyEntry(event)" style="display: flex; flex-direction: column; gap: 8px;">
-                <input type="hidden" id="editTpIndex">
-                <div><label>पार्टी नाम</label><input type="text" id="editTpParty" required style="margin-bottom:0;" value=""></div>
-                <div><label>सामान का नाम</label><input type="text" id="editTpItem" required style="margin-bottom:0;" value=""></div>
-                <div><label>मात्रा</label><input type="number" id="editTpQty" min="1" required style="margin-bottom:0;" value=""></div>
-                <div><label>देना किराया (Cost)</label><input type="number" id="editTpCost" min="0" required style="margin-bottom:0;" value=""></div>
-                <div><label>लेना किराया (Charge)</label><input type="number" id="editTpCharge" min="0" required style="margin-bottom:0;" value=""></div>
-                <button type="submit" class="glass-btn-blue" style="margin-top:4px;"><i class="fa-solid fa-check"></i> अपडेट करें</button>
-            </form>
-            <button type="button" onclick="closeEditTpModal()" class="action-btn" style="color: #e53e3e; margin-top: 10px; width:100%; justify-content:center;"><i class="fa-solid fa-xmark"></i> रद्द करें</button>
-        </div>
-    </div>
-
     <!-- कस्टमर पोर्टल -->
     <div id="customerFirstPortal" class="no-print" style="display: flex;">
         <div class="customer-scroll-wrap">
@@ -292,7 +265,7 @@
                 <div class="glass-card-green" style="border: 2px solid var(--emerald-neon);">
                     <div style="font-size: 14px; font-weight: 800; color: var(--emerald-neon); margin-bottom: 8px;"><i class="fa-solid fa-magnifying-glass"></i> बुकिंग स्टेटस और ड्यू पेमेंट</div>
                     <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                        <input type="text" id="customerStatusQuery" placeholder="बुकिंग आईडी या मोबाइल नंबर..." style="flex: 1; margin-bottom: 0;" value="">
+                        <input type="text" id="customerStatusQuery" placeholder="बुकिंग आईडी या मोबाइल नंबर दर्ज करें..." style="flex: 1; margin-bottom: 0;" value="">
                         <button type="button" onclick="checkCustomerBookingStatus()" class="glass-btn-green" style="width: auto; padding: 10px 18px; margin-top:0;"><i class="fa-solid fa-eye"></i> देखें</button>
                     </div>
                     <div id="customerStatusResultBox" style="display: none; margin-top: 12px; background: rgba(255,255,255,0.9); padding: 14px; border-radius: 14px;"></div>
@@ -302,9 +275,9 @@
                     <div class="glass-card-blue">
                         <div style="font-size: 14px; font-weight: 800; color: var(--primary-blue); margin-bottom: 8px; border-bottom: 2px solid rgba(43,108,176,0.15); padding-bottom: 4px;"><i class="fa-solid fa-user"></i> ग्राहक विवरण</div>
                         <div class="form-grid">
-                            <div><label><i class="fa-solid fa-signature"></i> नाम</label><input type="text" id="portalCustName" required placeholder="पूरा नाम" value=""></div>
-                            <div><label><i class="fa-solid fa-phone"></i> मोबाइल नंबर</label><input type="tel" id="portalCustMob" required pattern="[6-9][0-9]{9}" maxlength="10" placeholder="10 अंकों का सही मोबाइल नंबर" value=""></div>
-                            <div style="grid-column: 1/-1;"><label><i class="fa-solid fa-location-dot"></i> पूरा पता</label><textarea id="portalCustAddress" rows="1.5" required placeholder="पता दर्ज करें"></textarea></div>
+                            <div><label><i class="fa-solid fa-signature"></i> नाम</label><input type="text" id="portalCustName" required placeholder="ग्राहक का पूरा नाम दर्ज करें" value=""></div>
+                            <div><label><i class="fa-solid fa-phone"></i> मोबाइल नंबर</label><input type="tel" id="portalCustMob" required pattern="[6-9][0-9]{9}" maxlength="10" placeholder="10 अंकों का मोबाइल नंबर" value=""></div>
+                            <div style="grid-column: 1/-1;"><label><i class="fa-solid fa-location-dot"></i> पूरा पता</label><textarea id="portalCustAddress" rows="3" required placeholder="ग्राहक का पूरा पता दर्ज करें"></textarea></div>
                         </div>
                     </div>
 
@@ -314,32 +287,31 @@
                             <div>
                                 <label><i class="fa-solid fa-champagne-glasses"></i> फंक्शन</label>
                                 <select id="portalEventType" required>
-                                    <option value="" disabled selected>फंक्शन चुनें</option>
-                                    <option value="Marriage">शादी</option>
-                                    <option value="Birthday">जन्मदिन</option>
-                                    <option value="Party">पार्टी</option>
-                                    <option value="Other">अन्य</option>
+                                    <option value="" disabled selected>फंक्शन प्रकार चुनें</option>
+                                    <option value="Marriage">शादी (Marriage)</option>
+                                    <option value="Birthday">जन्मदिन (Birthday)</option>
+                                    <option value="Party">पार्टी (Party)</option>
+                                    <option value="Other">अन्य (Other)</option>
                                 </select>
                             </div>
-                            <div><label><i class="fa-solid fa-users"></i> गेस्ट काउंट</label><input type="number" id="portalGuestCount" min="1" value="" required placeholder="संख्या"></div>
+                            <div><label><i class="fa-solid fa-users"></i> गेस्ट काउंट</label><input type="number" id="portalGuestCount" min="1" value="" required placeholder="अंदाजे मेहमानों की संख्या"></div>
                             
-                            <!-- Date fields with Min validation set to today -->
-                            <div><label><i class="fa-solid fa-truck-fast"></i> डिस्पैच दिनांक</label><input type="date" id="portalEventDate" required onchange="updateReturnDateMinConstraint()"></div>
-                            <div><label><i class="fa-solid fa-rotate-left"></i> वापसी दिनांक</label><input type="date" id="portalReturnDate" required></div>
+                            <div><label><i class="fa-solid fa-truck-fast"></i> डिस्पैच दिनांक</label><input type="date" id="portalEventDate" required placeholder="डिस्पैच की तारीख चुनें" onchange="updateReturnDateMinConstraint()"></div>
+                            <div><label><i class="fa-solid fa-rotate-left"></i> वापसी दिनांक</label><input type="date" id="portalReturnDate" required placeholder="वापसी की तारीख चुनें"></div>
                         </div>
                     </div>
 
                     <div class="glass-card-green">
                         <div style="font-size: 14px; font-weight: 800; color: var(--emerald-neon); margin-bottom: 8px; border-bottom: 2px solid rgba(47,133,90,0.15); padding-bottom: 4px;"><i class="fa-solid fa-boxes-stacked"></i> सामान चुनें</div>
                         <div class="form-grid" style="margin-bottom: 6px;">
-                            <div><label><i class="fa-solid fa-box"></i> सामान</label><select id="portalStockSelect"><option value="" disabled selected>सामान चुनें</option></select></div>
-                            <div><label><i class="fa-solid fa-sort"></i> मात्रा</label><input type="number" id="portalItemQty" min="1" value=""></div>
-                            <button type="button" onclick="addSelectedItemToCart()" class="glass-btn-green" style="grid-column: 1/-1; margin-top:0;"><i class="fa-solid fa-circle-plus"></i> जोड़ें</button>
+                            <div><label><i class="fa-solid fa-box"></i> सामान</label><select id="portalStockSelect"><option value="" disabled selected>स्टॉक से सामान चुनें</option></select></div>
+                            <div><label><i class="fa-solid fa-sort"></i> मात्रा</label><input type="number" id="portalItemQty" min="1" placeholder="मात्रा दर्ज करें"></div>
+                            <button type="button" onclick="addSelectedItemToCart()" class="glass-btn-green" style="grid-column: 1/-1; margin-top:0;"><i class="fa-solid fa-circle-plus"></i> लिस्ट में जोड़ें</button>
                         </div>
                         <div class="table-responsive">
                             <table>
                                 <thead><tr><th style="color:var(--emerald-neon);">सामान</th><th style="color:var(--emerald-neon);">मात्रा</th><th style="text-align: right; color:var(--emerald-neon);">हटाएं</th></tr></thead>
-                                <tbody id="portalCartTableBody"><tr><td colspan="3" style="text-align: center; color:var(--text-muted);">कोई सामान नहीं</td></tr></tbody>
+                                <tbody id="portalCartTableBody"><tr><td colspan="3" style="text-align: center; color:var(--text-muted);">कोई सामान नहीं चुना गया</td></tr></tbody>
                             </table>
                         </div>
                     </div>
@@ -358,7 +330,7 @@
                         </div>
                         <div id="onlinePaymentSection" style="display: none; margin-top: 10px; text-align: center; padding: 10px; background: #e4ebf5; border-radius: 14px; box-shadow: inset 3px 3px 6px rgba(163,177,198,0.4);">
                             <canvas id="dynamicQrCanvas" style="width: 120px; height: 120px; margin-bottom: 6px; border-radius: 8px;"></canvas>
-                            <div><label><i class="fa-solid fa-receipt"></i> UTR नंबर</label><input type="text" id="portalUtrNumber" placeholder="UPI UTR दर्ज करें" value="" style="margin-bottom:0;"></div>
+                            <div><label><i class="fa-solid fa-receipt"></i> UTR नंबर</label><input type="text" id="portalUtrNumber" placeholder="UPI transaction UTR नंबर दर्ज करें" value="" style="margin-bottom:0;"></div>
                         </div>
                     </div>
 
@@ -376,13 +348,20 @@
     <!-- एडमिन पैनल -->
     <div id="adminPanel" class="no-print" style="display: none;">
         <div class="admin-container">
-            <div class="sidebar" id="appSidebar">
-                <div class="sidebar-brand" onclick="returnToCustomerPortal()" style="cursor: pointer;"><span id="overlayShopName">👑 ADMIN PANEL</span></div>
+            <div class="sidebar" id="appSidebar" onclick="event.stopPropagation()">
+                <!-- Digital Clock & Brand -->
+                <div class="sidebar-brand" onclick="returnToCustomerPortal()" style="cursor: pointer;">
+                    <div style="font-size: 13px; color: var(--emerald-neon); font-weight: 800; margin-bottom: 4px; display:flex; align-items:center; gap:5px;">
+                        <i class="fa-solid fa-clock"></i> <span id="digitalClockLabel">00:00:00 AM</span>
+                    </div>
+                    <span id="overlayShopName">👑 ADMIN PANEL</span>
+                </div>
+                
+                <!-- Complete Original Menu Order with ALL 17 Options -->
                 <ul class="menu-list">
                     <li class="menu-item active" onclick="switchTab('dashboard', this)"><i class="fa-solid fa-chart-pie" style="color:#2b6cb0;"></i> डैशबोर्ड</li>
                     <li class="menu-item" onclick="switchTab('master-ledger', this)"><i class="fa-solid fa-book" style="color:#d69e2e;"></i> मास्टर हिसाब-किताब</li>
                     <li class="menu-item" onclick="switchTab('ai-assistant', this)"><i class="fa-solid fa-robot" style="color:#3182ce;"></i> AI असिस्टेंट</li>
-                    <li class="menu-item" onclick="switchTab('direct-due-entry', this)"><i class="fa-solid fa-file-circle-plus" style="color:#10b981;"></i> डायरेक्ट ड्यू एंट्री</li>
                     <li class="menu-item" onclick="switchTab('customer-list', this)"><i class="fa-solid fa-users" style="color:#d53f8c;"></i> कस्टमर्स</li>
                     <li class="menu-item" onclick="switchTab('booking-list', this)"><i class="fa-solid fa-calendar-check" style="color:#2f855a;"></i> बुकिंग्स</li>
                     <li class="menu-item" onclick="switchTab('dispatch', this)"><i class="fa-solid fa-truck" style="color:#dd6b20;"></i> डिस्पैच</li>
@@ -395,40 +374,133 @@
                     <li class="menu-item" onclick="switchTab('calendar-view', this)"><i class="fa-solid fa-calendar-days" style="color:#d53f8c;"></i> कैलेंडर</li>
                     <li class="menu-item" onclick="switchTab('bill', this)"><i class="fa-solid fa-file-invoice-dollar" style="color:#2b6cb0;"></i> बिलिंग</li>
                     <li class="menu-item" onclick="switchTab('setting', this)"><i class="fa-solid fa-gear" style="color:#718096;"></i> सेटिंग्स</li>
+                    <li class="menu-item" onclick="switchTab('direct-due-entry', this)"><i class="fa-solid fa-file-circle-plus" style="color:#10b981;"></i> डायरेक्ट ड्यू एंट्री</li>
+                    <li class="menu-item" onclick="switchTab('quotation', this)"><i class="fa-solid fa-file-contract" style="color:#ec4899;"></i> कोटेशन</li>
                 </ul>
             </div>
 
             <div class="main-content">
                 <div class="header">
-                    <button type="button" class="mobile-toggle-btn" onclick="toggleMobileSidebar()"><i class="fa-solid fa-bars"></i></button>
+                    <button type="button" class="mobile-toggle-btn" onclick="toggleMobileSidebar(); event.stopPropagation();"><i class="fa-solid fa-bars"></i></button>
                     <h3 id="pageTitle" style="font-size: 15px; color: var(--primary-blue); font-weight: 700;">डैशबोर्ड</h3>
                 </div>
 
                 <div class="content-body">
-                    <!-- Dashboard -->
+                    <!-- Dashboard Report & Summary -->
                     <div id="dashboard" class="page-section active">
-                        <div class="glass-card-green" style="margin-bottom: 12px;">
-                            <h3 style="color:var(--emerald-neon); font-size:15px; margin-bottom:8px;"><i class="fa-solid fa-chart-line"></i> आमदनी व खर्च का ग्राफ (Analytics Summary)</h3>
-                            <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 10px;">
-                                <div style="background: rgba(255,255,255,0.7); padding: 10px 15px; border-radius: 12px; flex: 1;">
-                                    <span style="font-size: 12px; color: var(--text-muted);">कुल आमदनी (Total Income)</span>
-                                    <h3 id="graphTotalIncome" style="color: var(--emerald-neon); font-size: 18px;">₹0</h3>
+                        <div class="billion-stats-grid">
+                            <div class="billion-stat-card">
+                                <div class="billion-stat-icon"><i class="fa-solid fa-users"></i></div>
+                                <div style="flex:1;">
+                                    <span style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">कुल पंजीकृत ग्राहक</span>
+                                    <h3 id="corpTotalCust" style="font-size: 24px; font-weight: 800; color: var(--primary-blue); margin-top: 2px;">0</h3>
                                 </div>
-                                <div style="background: rgba(255,255,255,0.7); padding: 10px 15px; border-radius: 12px; flex: 1;">
-                                    <span style="font-size: 12px; color: var(--text-muted);">कुल खर्च (Total Expense)</span>
-                                    <h3 id="graphTotalExpense" style="color: #e53e3e; font-size: 18px;">₹0</h3>
+                            </div>
+                            <div class="billion-stat-card green">
+                                <div class="billion-stat-icon"><i class="fa-solid fa-calendar-check"></i></div>
+                                <div style="flex:1;">
+                                    <span style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">सक्रिय बुकिंग्स</span>
+                                    <h3 id="corpActiveBookings" style="font-size: 24px; font-weight: 800; color: var(--emerald-neon); margin-top: 2px;">0</h3>
+                                </div>
+                            </div>
+                            <div class="billion-stat-card amber">
+                                <div class="billion-stat-icon"><i class="fa-solid fa-indian-rupee-sign"></i></div>
+                                <div style="flex:1;">
+                                    <span style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">कुल बकाया (Total Dues)</span>
+                                    <h3 id="corpTotalDues" style="font-size: 24px; font-weight: 800; color: var(--amber-neon); margin-top: 2px;">₹0</h3>
+                                </div>
+                            </div>
+                            <div class="billion-stat-card pink">
+                                <div class="billion-stat-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                                <div style="flex:1;">
+                                    <span style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">मिसिंग आइटम्स</span>
+                                    <h3 id="corpMissingItems" style="font-size: 24px; font-weight: 800; color: var(--pink-neon); margin-top: 2px;">0</h3>
                                 </div>
                             </div>
                         </div>
 
+                        <!-- Executive Financial Report Statement -->
+                        <div class="glass-card-green" style="margin-bottom: 14px;">
+                            <h3 style="color:var(--emerald-neon); font-size:16px; margin-bottom:10px;"><i class="fa-solid fa-chart-line"></i> कॉर्पोरेट वित्तीय सारांश रिपोर्ट (Executive Financial Report)</h3>
+                            <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 10px;">
+                                <div style="background: rgba(255,255,255,0.8); padding: 16px 20px; border-radius: 16px; flex: 1; box-shadow: inset 4px 4px 8px rgba(163,177,198,0.5), inset -4px -4px 8px rgba(255,255,255,0.9);">
+                                    <span style="font-size: 12.5px; color: var(--text-muted); font-weight: 700;">कुल प्राप्त आमदनी (Total Revenue)</span>
+                                    <h3 id="graphTotalIncome" style="color: var(--emerald-neon); font-size: 22px; font-weight: 800; margin-top: 6px;">₹0</h3>
+                                </div>
+                                <div style="background: rgba(255,255,255,0.8); padding: 16px 20px; border-radius: 16px; flex: 1; box-shadow: inset 4px 4px 8px rgba(163,177,198,0.5), inset -4px -4px 8px rgba(255,255,255,0.9);">
+                                    <span style="font-size: 12.5px; color: var(--text-muted); font-weight: 700;">कुल व्यावसायिक खर्च (Total Expenditure)</span>
+                                    <h3 id="graphTotalExpense" style="color: #e53e3e; font-size: 22px; font-weight: 800; margin-top: 6px;">₹0</h3>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Menu Options Summary Status Report -->
+                        <div class="glass-card-blue" style="margin-bottom: 14px;">
+                            <h3 style="color: var(--primary-blue); font-size: 16px; margin-bottom: 10px;"><i class="fa-solid fa-clipboard-list"></i> मेनू ऑप्शंस स्टेटस रिपोर्ट (All Modules Overview)</h3>
+                            <div class="table-responsive" style="max-height: 220px;">
+                                <table>
+                                    <thead>
+                                        <tr><th>मॉड्यूल / मेनू नाम</th><th>स्थिति (Status)</th><th>कुल रिकॉर्ड्स / विवरण</th></tr>
+                                    </thead>
+                                    <tbody id="menuOptionsReportTable">
+                                        <tr><td>मास्टर हिसाब-किताब</td><td><span style="color:var(--emerald-neon);">सक्रिय</span></td><td>लेज़र सिंकड</td></tr>
+                                        <tr><td>AI असिस्टेंट</td><td><span style="color:var(--emerald-neon);">सक्रिय</span></td><td>वॉयस/टेक्स्ट कमांड रेडी</td></tr>
+                                        <tr><td>कस्टमर्स लिस्ट</td><td><span style="color:var(--emerald-neon);">सक्रिय</span></td><td id="repCustCount">0 रिकॉर्ड्स</td></tr>
+                                        <tr><td>बुकिंग्स मैनेजमेंट</td><td><span style="color:var(--emerald-neon);">सक्रिय</span></td><td id="repBookingCount">0 एक्टिव बुकिंग्स</td></tr>
+                                        <tr><td>डिस्पैच कंट्रोल</td><td><span style="color:var(--emerald-neon);">सक्रिय</span></td><td>रेडी फॉर डिलीवरी</td></tr>
+                                        <tr><td>रिटर्न डिपार्टमेंट</td><td><span style="color:var(--emerald-neon);">सक्रिय</span></td><td>काउंटिंग चेक एक्टिव</td></tr>
+                                        <tr><td>मिसिंग लिस्ट</td><td><span style="color:var(--emerald-neon);">सक्रिय</span></td><td>जीरो मिसिंग</td></tr>
+                                        <tr><td>स्टॉक डेटाबेस</td><td><span style="color:var(--emerald-neon);">सक्रिय</span></td><td id="repStockCount">इन्वेंट्री अपडेटेड</td></tr>
+                                        <tr><td>थर्ड पार्टी लेज़र</td><td><span style="color:var(--emerald-neon);">सक्रिय</span></td><td>पार्टी वाइज मैनेज्ड</td></tr>
+                                        <tr><td>परचेज रिकॉर्ड</td><td><span style="color:var(--emerald-neon);">सक्रिय</span></td><td>खर्च लिंक्ड</td></tr>
+                                        <tr><td>आमदनी / खर्च</td><td><span style="color:var(--emerald-neon);">सक्रिय</span></td><td>बैलेंस शीट बैलेंस</td></tr>
+                                        <tr><td>कैलेंडर व्यू</td><td><span style="color:var(--emerald-neon);">सक्रिय</span></td><td>बुकिंग शेड्यूलर</td></tr>
+                                        <tr><td>बिलिंग सिस्टम</td><td><span style="color:var(--emerald-neon);">सक्रिय</span></td><td>GST & PDF जनरेटर</td></tr>
+                                        <tr><td>सेटिंग्स & QR</td><td><span style="color:var(--emerald-neon);">सक्रिय</span></td><td>WhatsApp API लिंक्ड</td></tr>
+                                        <tr><td>डायरेक्ट ड्यू एंट्री</td><td><span style="color:var(--emerald-neon);">सक्रिय</span></td><td>इंसेंटिव लेज़र</td></tr>
+                                        <tr><td>कोटेशन मेकर</td><td><span style="color:var(--emerald-neon);">सक्रिय</span></td><td>गेस्ट एस्टीमेट रेडी</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
                         <div class="glass-card-blue">
-                            <h3 style="color: var(--primary-blue); margin-bottom: 8px; font-size: 14px;"><i class="fa-solid fa-triangle-exclamation"></i> लो स्टॉक अलर्ट</h3>
+                            <h3 style="color: var(--primary-blue); font-size: 15px; margin-bottom: 8px;"><i class="fa-solid fa-boxes-stacked"></i> इन्वेंट्री स्टॉक नियंत्रण & लो स्टॉक चेतावनी</h3>
                             <select id="lowStockDropdown" style="margin-bottom:0;"><option value="" disabled selected>स्टॉक सामान्य है...</option></select>
                         </div>
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 18px;">
-                            <div class="glass-card-blue" style="margin-bottom:0; padding:14px;"><h4 style="color:var(--primary-blue); font-size:13px;"><i class="fa-solid fa-users"></i> कुल कस्टमर्स</h4><h2 id="totalCustCountText" style="color:var(--text-main); font-size:20px;">0</h2></div>
-                            <div class="glass-card-green" style="margin-bottom:0; padding:14px;"><h4 style="color:var(--emerald-neon); font-size:13px;"><i class="fa-solid fa-calendar-check"></i> सक्रिय बुकिंग्स</h4><h2 id="activeBookingCountText" style="color:var(--text-main); font-size:20px;">0</h2></div>
-                            <div class="glass-card-purple" style="margin-bottom:0; padding:14px;"><h4 style="color:var(--pink-neon); font-size:13px;"><i class="fa-solid fa-boxes-packing"></i> मिसिंग आइटम्स</h4><h2 id="totalMissingCountText" style="color: #e53e3e; font-size:20px;">0</h2></div>
+                    </div>
+
+                    <!-- Quotation Generator Page -->
+                    <div id="quotation" class="page-section">
+                        <div class="glass-card-blue" style="margin-bottom: 12px;">
+                            <h3 style="color: var(--primary-blue); font-size: 16px; margin-bottom: 8px;"><i class="fa-solid fa-file-contract"></i> कस्टमर कोटेशन मेकर (प्राइस कोटेशन)</h3>
+                            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">यहाँ से गेस्ट की संख्या या मैनुअल सामान चुनकर कोटेशन बना सकते हैं। इससे ओनर का स्टॉक कम नहीं होगा।</p>
+                            
+                            <div class="form-grid" style="margin-bottom: 10px;">
+                                <div><label>कस्टमर नाम</label><input type="text" id="quotCustName" placeholder="कस्टमर का नाम दर्ज करें" value=""></div>
+                                <div><label>मोबाइल नंबर</label><input type="tel" id="quotCustMob" placeholder="10 अंकों का मोबाइल नंबर" maxlength="10" value=""></div>
+                                <div><label>गेस्ट संख्या (Guest Count)</label><input type="number" id="quotGuestCount" min="1" placeholder="उदा: 500" value="" oninput="generateAutoQuotationList()"></div>
+                            </div>
+
+                            <div style="background: rgba(255,255,255,0.6); padding: 10px; border-radius: 12px; margin-top: 10px;">
+                                <h4 style="color:var(--primary-blue); font-size:13px; margin-bottom:6px;">📦 सामान जोड़ें (Manual Item Selection)</h4>
+                                <div class="form-grid">
+                                    <div><label>सामान चुनें</label><select id="quotStockSelect" style="margin-bottom:0;"><option value="" disabled selected>सामान चुनें</option></select></div>
+                                    <div><label>मात्रा</label><input type="number" id="quotItemQty" min="1" placeholder="मात्रा" style="margin-bottom:0;"></div>
+                                    <div style="display: flex; align-items: flex-end;"><button type="button" onclick="addQuotationManualItem()" class="glass-btn-green" style="margin-top:0;"><i class="fa-solid fa-plus"></i> कोटेशन में जोड़ें</button></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table>
+                                <thead><tr><th>SN</th><th>सामान का नाम</th><th>मात्रा</th><th>अनुमानित रेंट</th><th>अमाउंट</th><th>एक्शन</th></tr></thead>
+                                <tbody id="quotationTableBody"><tr><td colspan="6" style="text-align:center;">कोटेशन खाली है... गेस्ट संख्या या सामान जोड़ें</td></tr></tbody>
+                            </table>
+                        </div>
+
+                        <div style="display: flex; gap: 10px; margin-top: 10px;">
+                            <button type="button" onclick="sendQuotationViaWhatsApp()" class="glass-btn-green" style="flex:1;"><i class="fa-brands fa-whatsapp"></i> WhatsApp पर कोटेशन भेजें</button>
                         </div>
                     </div>
 
@@ -436,13 +508,13 @@
                     <div id="direct-due-entry" class="page-section">
                         <form onsubmit="saveDirectDueCustomerEntry(event)" class="glass-card-blue" style="margin-bottom: 12px;">
                             <h3 style="color: var(--primary-blue); font-size: 16px; margin-bottom: 10px;"><i class="fa-solid fa-file-circle-plus"></i> कस्टमर और डायरेक्ट ड्यू पेमेंट एंट्री</h3>
-                            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">यहाँ से आप सीधे कस्टमर की डिटेल्स और उनका बकाया (Due) पेमेंट दर्ज कर सकते हैं, जो तुरंत कस्टमर लिस्ट और मास्टर लेज़र में शो होने लगेगा।</p>
+                            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">यहाँ से आप सीधे कस्टमर की डिटेल्स और उनका बकाया (Due) पेमेंट दर्ज कर सकते हैं।</p>
                             <div class="form-grid">
-                                <div><label>ग्राहक का नाम</label><input type="text" id="dirCustName" required placeholder="पूरा नाम" value=""></div>
-                                <div><label>मोबाइल नंबर</label><input type="tel" id="dirCustMob" required pattern="[6-9][0-9]{9}" maxlength="10" placeholder="10 अंकों का मोबाइल" value=""></div>
-                                <div><label>पूरा पता</label><input type="text" id="dirCustAddress" required placeholder="पता दर्ज करें" value=""></div>
-                                <div><label>कुल किराया राशि (Total Rent ₹)</label><input type="number" id="dirTotalRent" required min="1" placeholder="कुल किराया" value=""></div>
-                                <div><label>जमा राशि / एडवांस (Paid ₹)</label><input type="number" id="dirPaidAmount" required min="0" placeholder="जमा रुपये" value=""></div>
+                                <div><label>ग्राहक का नाम</label><input type="text" id="dirCustName" required placeholder="ग्राहक का पूरा नाम" value=""></div>
+                                <div><label>मोबाइल नंबर</label><input type="tel" id="dirCustMob" required pattern="[6-9][0-9]{9}" maxlength="10" placeholder="10 अंकों का मोबाइल नंबर" value=""></div>
+                                <div><label>पूरा पता</label><input type="text" id="dirCustAddress" required placeholder="ग्राहक का पूरा पता" value=""></div>
+                                <div><label>कुल किराया राशि (Total Rent ₹)</label><input type="number" id="dirTotalRent" required min="1" placeholder="कुल किराया राशि दर्ज करें" value=""></div>
+                                <div><label>जमा राशि / एडवांस (Paid ₹)</label><input type="number" id="dirPaidAmount" required min="0" placeholder="जमा की गई राशि" value=""></div>
                                 <button type="submit" class="glass-btn-green" style="grid-column: 1/-1; margin-top:4px;"><i class="fa-solid fa-floppy-disk"></i> ड्यू एंट्री सेव करें</button>
                             </div>
                         </form>
@@ -451,7 +523,7 @@
                     <!-- Master Ledger -->
                     <div id="master-ledger" class="page-section">
                         <div class="glass-card-blue">
-                            <h3 style="color: var(--primary-blue); margin-bottom: 8px; font-size: 16px;"><i class="fa-solid fa-book-open"></i> मास्टर वित्तीय रिकॉर्ड</h3>
+                            <h3 style="color: var(--primary-blue); font-size: 16px; margin-bottom: 8px;"><i class="fa-solid fa-book-open"></i> मास्टर वित्तीय रिकॉर्ड</h3>
                             <div style="display: flex; gap: 8px; flex-wrap: wrap;">
                                 <button type="button" onclick="exportLedgerToExcel()" class="glass-btn-green" style="max-width: 220px; margin-top:0;"><i class="fa-solid fa-file-excel"></i> Excel डाउनलोड</button>
                                 <button type="button" onclick="exportGstr1Report()" class="glass-btn-cyan" style="max-width: 220px; margin-top:0;"><i class="fa-solid fa-file-invoice"></i> GST GSTR-1 रिपोर्ट</button>
@@ -468,15 +540,23 @@
 
                     <!-- AI Assistant -->
                     <div id="ai-assistant" class="page-section">
-                        <div class="glass-card-blue">
-                            <h3 style="color: var(--primary-blue); font-size: 15px; margin-bottom: 8px;"><i class="fa-solid fa-robot"></i> एडवांस AI असिस्टेंट कंट्रोल सेंटर</h3>
-                            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 10px;">आप बोलकर या लिखकर पूरे सॉफ्टवेयर को नियंत्रित कर सकते हैं (उदा: 'स्टॉक दिखाओ', 'डिस्पैच खोलो')</p>
-                            <div style="display: flex; gap: 8px; margin-top: 6px;">
-                                <input type="text" id="aiCommandInput" placeholder="निर्देश टाइप करें..." style="margin-bottom:0;" value="">
-                                <button type="button" onclick="executeAiCommand()" class="glass-btn-blue" style="width: auto; padding: 10px 18px; margin-top:0;"><i class="fa-solid fa-play"></i> रन करें</button>
-                                <button type="button" onclick="startVoiceRecognition()" class="glass-btn-cyan" style="width: auto; padding: 10px 16px; margin-top:0;"><i class="fa-solid fa-microphone"></i> बोलें</button>
+                        <div class="glass-card-blue" style="text-align: center; padding: 24px;">
+                            <div style="width: 60px; height: 60px; margin: 0 auto 12px auto; background: linear-gradient(135deg, #00f2fe, #2b6cb0); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 24px; box-shadow: 0 4px 15px rgba(43,108,176,0.4);">
+                                <i class="fa-solid fa-robot"></i>
                             </div>
-                            <div id="aiAssistantResponse" style="margin-top: 12px; background: rgba(255,255,255,0.9); padding: 12px; border-radius: 12px; font-size: 13px; font-weight: 700; color: var(--emerald-neon);">
+                            <h3 style="color: var(--primary-blue); font-size: 18px; font-weight: 800; margin-bottom: 6px;">एडवांस AI असिस्टेंट कंट्रोल सेंटर</h3>
+                            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">बोलकर या टाइप करके पूरे सॉफ्टवेयर को आसानी से नियंत्रित करें</p>
+                            
+                            <div style="display: flex; flex-direction: column; gap: 10px; max-width: 500px; margin: 0 auto 15px auto;">
+                                <input type="text" id="aiCommandInput" placeholder="निर्देश यहाँ टाइप करें (उदा: स्टॉक दिखाओ)..." style="margin-bottom:0; text-align: center;" value="">
+                            </div>
+
+                            <div style="display: flex; gap: 12px; justify-content: center; max-width: 400px; margin: 0 auto;">
+                                <button type="button" onclick="executeAiCommand()" class="glass-btn-blue" style="flex: 1; padding: 14px; border-radius: 14px; font-size: 14px;"><i class="fa-solid fa-play"></i> रन करें</button>
+                                <button type="button" onclick="startVoiceRecognition()" class="glass-btn-cyan" style="flex: 1; padding: 14px; border-radius: 14px; font-size: 14px; background: linear-gradient(135deg, #10b981 0%, #047857 100%) !important;"><i class="fa-solid fa-microphone"></i> बोलें</button>
+                            </div>
+
+                            <div id="aiAssistantResponse" style="margin-top: 18px; background: rgba(255,255,255,0.9); padding: 14px; border-radius: 14px; font-size: 13.5px; font-weight: 700; color: var(--emerald-neon); box-shadow: inset 2px 2px 5px rgba(0,0,0,0.05);">
                                 AI असिस्टेंट सक्रिय है... निर्देश दें।
                             </div>
                         </div>
@@ -509,7 +589,7 @@
                     <!-- Dispatch -->
                     <div id="dispatch" class="page-section">
                         <div class="glass-card-blue">
-                            <h3 style="color: var(--primary-blue); margin-bottom: 8px; font-size: 15px;"><i class="fa-solid fa-truck-ramp-box"></i> डिस्पैच</h3>
+                            <h3 style="color: var(--primary-blue); font-size: 15px; margin-bottom: 8px;"><i class="fa-solid fa-truck-ramp-box"></i> डिस्पैच</h3>
                             <div style="margin-bottom: 10px; background: rgba(255,255,255,0.6); padding: 10px; border-radius: 12px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between;">
                                 <div style="display: flex; align-items: center; gap: 6px;">
                                     <input type="checkbox" id="useThirdPartyToggle" onchange="toggleThirdPartyDispatchBox()" style="width: 18px; height: 18px; cursor: pointer;">
@@ -527,22 +607,23 @@
                                 <div class="form-grid">
                                     <div><label>पार्टी चुनें</label><select id="tpDispatchPartySelect" onchange="populateTpItemsForParty()" style="margin-bottom:0;"><option value="" disabled selected>पार्टी चुनें</option></select></div>
                                     <div><label>सामान</label><select id="tpDispatchItemDropdown" style="margin-bottom:0;"><option value="" disabled selected>सामान चुनें</option></select></div>
-                                    <div><label>मात्रा</label><input type="number" id="tpDispatchQty" min="1" value="" placeholder="1" style="margin-bottom:0;"></div>
+                                    <div><label>मात्रा</label><input type="number" id="tpDispatchQty" min="1" value="" placeholder="मात्रा" style="margin-bottom:0;"></div>
                                     <div style="display: flex; align-items: flex-end;"><button type="button" onclick="addThirdPartyItemToDispatch()" class="glass-btn-green" style="margin-top:0;"><i class="fa-solid fa-plus"></i> जोड़ें</button></div>
                                 </div>
                             </div>
 
-                            <div style="background: rgba(43,108,176,0.1); padding: 12px; border-radius: 12px; border: 1px dashed var(--primary-blue); margin-bottom: 10px;">
+                            <!-- Owner Stock Dispatch Box -->
+                            <div id="ownerStockDispatchSection" style="background: rgba(43,108,176,0.1); padding: 12px; border-radius: 12px; border: 1px dashed var(--primary-blue); margin-bottom: 10px;">
                                 <h4 style="color: var(--primary-blue); font-size: 13px; margin-bottom: 6px;"><i class="fa-solid fa-boxes-stacked"></i> स्टॉक से सामान जोड़ें (Owner Stock)</h4>
                                 <div class="form-grid">
                                     <div><label>स्टॉक सामान</label><select id="adminAddStockSelect" style="margin-bottom:0;"><option value="" disabled selected>सामान चुनें</option></select></div>
-                                    <div><label>मात्रा</label><input type="number" id="adminAddStockQty" min="1" value="" placeholder="1" style="margin-bottom:0;"></div>
+                                    <div><label>मात्रा</label><input type="number" id="adminAddStockQty" min="1" value="" placeholder="मात्रा" style="margin-bottom:0;"></div>
                                     <div style="display: flex; align-items: flex-end;"><button type="button" onclick="addItemToPendingBookingDispatch()" class="glass-btn-blue" style="margin-top:0;"><i class="fa-solid fa-circle-plus"></i> आर्डर में जोड़ें</button></div>
                                 </div>
                             </div>
 
                             <div class="form-grid" style="margin-bottom: 8px;">
-                                <div><label><i class="fa-solid fa-barcode"></i> बारकोड स्कैन / सर्च करें</label><input type="text" id="dispatchSearchId" placeholder="आईडी या नाम..." style="margin-bottom:0;" value="" oninput="handleUniversalDispatchSearch(this.value)"></div>
+                                <div><label><i class="fa-solid fa-barcode"></i> बारकोड स्कैन / सर्च करें</label><input type="text" id="dispatchSearchId" placeholder="बुकिंग आईडी या नाम दर्ज करें..." style="margin-bottom:0;" value="" oninput="handleUniversalDispatchSearch(this.value)"></div>
                                 <div style="display: flex; align-items: flex-end; gap: 6px;">
                                     <button type="button" onclick="searchDispatchBooking()" class="glass-btn-blue" style="margin-top:0;"><i class="fa-solid fa-magnifying-glass"></i> खोजें</button>
                                     <button type="button" onclick="startCameraScannerForDispatch()" class="glass-btn-cyan" style="margin-top:0;"><i class="fa-solid fa-camera"></i> कैमरा</button>
@@ -566,7 +647,7 @@
                         <div class="glass-card-purple">
                             <h3 style="color: var(--pink-neon); margin-bottom: 6px; font-size: 15px;"><i class="fa-solid fa-rotate-right"></i> रिटर्न (कस्टमर सामान वापसी)</h3>
                             <div class="form-grid" style="margin-bottom: 10px;">
-                                <div><label><i class="fa-solid fa-barcode"></i> बारकोड / आईडी सर्च करें</label><input type="text" id="returnBarcodeInput" placeholder="आईडी या नाम..." style="margin-bottom:0;" value="" oninput="handleUniversalReturnSearch(this.value)"></div>
+                                <div><label><i class="fa-solid fa-barcode"></i> बारकोड / आईडी सर्च करें</label><input type="text" id="returnBarcodeInput" placeholder="बुकिंग आईडी या नाम दर्ज करें..." style="margin-bottom:0;" value="" oninput="handleUniversalReturnSearch(this.value)"></div>
                                 <div style="display: flex; align-items: flex-end; gap: 6px;">
                                     <button type="button" onclick="loadReturnBookingForCounting()" class="glass-btn-blue" style="margin-top:0;"><i class="fa-solid fa-arrow-down-long"></i> लोड</button>
                                     <button type="button" onclick="startCameraScannerForReturn()" class="glass-btn-cyan" style="margin-top:0;"><i class="fa-solid fa-camera"></i> कैमरा</button>
@@ -606,19 +687,18 @@
                     <div id="stock" class="page-section">
                         <form onsubmit="saveStockItemReal(event)" class="glass-card-green">
                             <h3 style="color:var(--emerald-neon); margin-bottom:8px; font-size:15px;"><i class="fa-solid fa-square-plus"></i> नया सामान जोड़ें</h3>
-                            <div style="margin-bottom: 10px; display: flex; gap: 8px; flex-wrap: wrap;">
-                                <button type="button" onclick="startAiScanner()" class="glass-btn-cyan" style="max-width: 250px;"><i class="fa-solid fa-barcode"></i> बारकोड स्कैन करें</button>
-                                <button type="button" onclick="printAllBarcodes()" class="glass-btn-green" style="max-width: 220px;"><i class="fa-solid fa-print"></i> बारकोड प्रिंट</button>
-                                <label class="glass-btn-blue" style="max-width: 220px; margin-top:0; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; font-size:12.5px;">
-                                    <i class="fa-solid fa-file-arrow-up"></i> एक्सेल इम्पोर्ट (CSV) <input type="file" id="csvFileInput" accept=".csv" onchange="importStockFromCSV(event)" style="display:none;">
-                                </label>
+                            
+                            <div style="margin-bottom: 12px; display: flex; gap: 8px; flex-wrap: wrap;">
+                                <button type="button" onclick="startAiScanner()" class="glass-btn-cyan" style="flex: 1; min-width: 150px; margin-top:0;"><i class="fa-solid fa-barcode"></i> बारकोड स्कैन करें</button>
+                                <button type="button" onclick="printAllBarcodes()" class="glass-btn-green" style="flex: 1; min-width: 150px; margin-top:0;"><i class="fa-solid fa-print"></i> बारकोड प्रिंट</button>
                             </div>
+
                             <div class="form-grid">
-                                <div><label>नाम</label><input type="text" id="stockItemName" required placeholder="सामान नाम" value=""></div>
-                                <div><label>मात्रा</label><input type="number" id="stockItemQty" required min="1" value="" placeholder="10"></div>
-                                <div><label>सेट रेंट</label><input type="number" id="stockItemSetRent" required min="0" value="" placeholder="500"></div>
-                                <div><label>सिंगल रेंट</label><input type="number" id="stockItemSingleRent" required min="0" value="" placeholder="700"></div>
-                                <div><label>मिसिंग चार्ज</label><input type="number" id="stockItemMissing" required min="0" value="" placeholder="100"></div>
+                                <div><label>नाम</label><input type="text" id="stockItemName" required placeholder="सामान का नाम दर्ज करें" value=""></div>
+                                <div><label>मात्रा</label><input type="number" id="stockItemQty" required min="1" value="" placeholder="स्टॉक मात्रा"></div>
+                                <div><label>सेट रेंट</label><input type="number" id="stockItemSetRent" required min="0" value="" placeholder="सेट किराया (₹)"></div>
+                                <div><label>सिंगल रेंट</label><input type="number" id="stockItemSingleRent" required min="0" value="" placeholder="सिंगल किराया (₹)"></div>
+                                <div><label>मिसिंग चार्ज</label><input type="number" id="stockItemMissing" required min="0" value="" placeholder="मिसिंग जुर्माना (₹)"></div>
                                 <button type="submit" class="glass-btn-green" style="grid-column: 1/-1; margin-top:0;"><i class="fa-solid fa-floppy-disk"></i> सेव करें</button>
                             </div>
                         </form>
@@ -635,11 +715,11 @@
                         <form onsubmit="saveThirdPartyEntry(event)" class="glass-card-blue" style="margin-bottom: 12px;">
                             <h3 style="color: var(--primary-blue); font-size: 15px; margin-bottom: 8px;"><i class="fa-solid fa-handshake"></i> थर्ड-पार्टी एंट्री</h3>
                             <div class="form-grid">
-                                <div><label>पार्टी नाम</label><input type="text" id="tpPartyName" required placeholder="पार्टी नाम" value="" style="margin-bottom:0;"></div>
-                                <div><label>सामान नाम</label><input type="text" id="tpItemName" required placeholder="सामान" value="" style="margin-bottom:0;"></div>
-                                <div><label>मात्रा</label><input type="number" id="tpItemQty" min="1" required value="" placeholder="10" style="margin-bottom:0;"></div>
-                                <div><label>देना किराया (Cost)</label><input type="number" id="tpItemCost" min="0" required value="" placeholder="400" style="margin-bottom:0;"></div>
-                                <div><label>लेना किराया (Charge)</label><input type="number" id="tpItemCharge" min="0" required value="" placeholder="600" style="margin-bottom:0;"></div>
+                                <div><label>पार्टी नाम</label><input type="text" id="tpPartyName" required placeholder="थर्ड पार्टी पार्टी का नाम" value="" style="margin-bottom:0;"></div>
+                                <div><label>सामान नाम</label><input type="text" id="tpItemName" required placeholder="सामान का नाम" value="" style="margin-bottom:0;"></div>
+                                <div><label>मात्रा</label><input type="number" id="tpItemQty" min="1" required value="" placeholder="मात्रा" style="margin-bottom:0;"></div>
+                                <div><label>देना किराया (Cost)</label><input type="number" id="tpItemCost" min="0" required value="" placeholder="देना किराया (₹)" style="margin-bottom:0;"></div>
+                                <div><label>लेना किराया (Charge)</label><input type="number" id="tpItemCharge" min="0" required value="" placeholder="लेना किराया (₹)" style="margin-bottom:0;"></div>
                                 <button type="submit" class="glass-btn-blue" style="margin-top:4px;"><i class="fa-solid fa-circle-plus"></i> सेव करें</button>
                             </div>
                         </form>
@@ -658,18 +738,19 @@
                         <form onsubmit="savePurchaseEntry(event)" class="glass-card-green" style="margin-bottom: 12px;">
                             <h3 style="color: var(--emerald-neon); font-size: 15px; margin-bottom: 8px;"><i class="fa-solid fa-cart-shopping"></i> परचेज एंट्री</h3>
                             <div class="form-grid">
-                                <div><label>दिनांक</label><input type="date" id="purDate" required style="margin-bottom:0;" value=""></div>
-                                <div><label>सामान</label><input type="text" id="purItemName" required placeholder="सामान" value="" style="margin-bottom:0;"></div>
-                                <div><label>मात्रा</label><input type="number" id="purItemQty" min="1" required value="" placeholder="5" style="margin-bottom:0;"></div>
-                                <div><label>कीमत</label><input type="number" id="purItemPrice" min="1" required value="" placeholder="2000" style="margin-bottom:0;"></div>
-                                <div><label>सप्लायर</label><input type="text" id="purSupplier" required placeholder="सप्लायर" value="" style="margin-bottom:0;"></div>
+                                <div><label>दिनांक</label><input type="date" id="purDate" required style="margin-bottom:0;"></div>
+                                <div><label>सामान</label><input type="text" id="purItemName" required placeholder="खरीदे गए सामान का नाम" value="" style="margin-bottom:0;"></div>
+                                <div><label>मात्रा (Qty)</label><input type="number" id="purItemQty" min="1" required value="" placeholder="मात्रा" oninput="calculatePurchasePrices('qty')" style="margin-bottom:0;"></div>
+                                <div><label>प्रति पीस कीमत (/Piece ₹)</label><input type="number" id="purItemPerPiecePrice" min="0" step="any" placeholder="प्रति पीस दाम" value="" oninput="calculatePurchasePrices('piece')" style="margin-bottom:0;"></div>
+                                <div><label>कुल कीमत (Total Price ₹)</label><input type="number" id="purItemTotalPrice" min="0" step="any" placeholder="कुल दाम" value="" oninput="calculatePurchasePrices('total')" style="margin-bottom:0;"></div>
+                                <div><label>सप्लायर</label><input type="text" id="purSupplier" required placeholder="सप्लायर का नाम" value="" style="margin-bottom:0;"></div>
                                 <button type="submit" class="glass-btn-green" style="grid-column: 1/-1; margin-top:4px;"><i class="fa-solid fa-floppy-disk"></i> सेव करें</button>
                             </div>
                         </form>
                         <div class="table-responsive">
                             <table>
-                                <thead><tr><th>दिनांक</th><th>सामान</th><th>मात्रा</th><th>कीमत</th><th>सप्लायर</th><th>एक्शन</th></tr></thead>
-                                <tbody id="purchaseTableBody"><tr><td colspan="6" style="text-align:center;">कोई परचेज नहीं</td></tr></tbody>
+                                <thead><tr><th>दिनांक</th><th>सामान</th><th>मात्रा</th><th>प्रति पीस</th><th>कुल कीमत</th><th>सप्लायर</th><th>एक्शन</th></tr></thead>
+                                <tbody id="purchaseTableBody"><tr><td colspan="7" style="text-align:center;">कोई परचेज नहीं</td></tr></tbody>
                             </table>
                         </div>
                     </div>
@@ -677,10 +758,10 @@
                     <!-- Income / Expense -->
                     <div id="income-expense" class="page-section">
                         <form onsubmit="saveDailyExpense(event)" class="glass-card-blue" style="margin-bottom: 12px;">
-                            <h3 style="color: var(--primary-blue); font-size: 15px; margin-bottom: 8px;"><i class="fa-solid fa-receipt"></i> दैनिक खर्च</h3>
+                            <h3 style="color: var(--primary-blue); font-size: 15px; margin-bottom: 8px;"><i class="fa-solid fa-receipt"></i> दैनिक खर्च (<span id="currentExpenseDateDisplay"></span>)</h3>
                             <div class="form-grid">
-                                <div><label>विवरण</label><input type="text" id="expenseDesc" required placeholder="कारण" value="" style="margin-bottom:0;"></div>
-                                <div><label>राशि</label><input type="number" id="expenseAmount" min="1" required placeholder="राशि" value="" style="margin-bottom:0;"></div>
+                                <div><label>विवरण</label><input type="text" id="expenseDesc" required placeholder="खर्च का कारण या विवरण" value="" style="margin-bottom:0;"></div>
+                                <div><label>राशि</label><input type="number" id="expenseAmount" min="1" required placeholder="रुपये (₹)" value="" style="margin-bottom:0;"></div>
                                 <button type="submit" class="glass-btn-cyan" style="grid-column: 1/-1; margin-top:4px;"><i class="fa-solid fa-circle-plus"></i> खर्च दर्ज करें</button>
                             </div>
                         </form>
@@ -723,7 +804,7 @@
                         </div>
                     </div>
 
-                    <!-- Settings with Direct Logo Upload & Collapsible Sections -->
+                    <!-- Settings -->
                     <div id="setting" class="page-section">
                         
                         <!-- Section 1: QR Code & Portal Link -->
@@ -735,7 +816,7 @@
                             <div id="secQrBody" class="settings-section-body show">
                                 <form onsubmit="saveSettings(event)">
                                     <div class="form-grid">
-                                        <div><label>सॉफ्टवेयर लाइव लिंक (URL)</label><input type="text" id="settingSoftwareUrl" placeholder="https://..." value="http://my-multi-shop.vercel.app" oninput="generatePortalQrCode(this.value)"></div>
+                                        <div><label>सॉफ्टवेयर लाइव लिंक (URL)</label><input type="text" id="settingSoftwareUrl" placeholder="https://yourdomain.com" value="http://my-multi-shop.vercel.app" oninput="generatePortalQrCode(this.value)"></div>
                                     </div>
                                     <div style="text-align: center; margin: 10px 0;">
                                         <canvas id="portalShareQrCanvas" style="width: 130px; height: 130px; border-radius: 8px; background:#fff; padding:6px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);"></canvas>
@@ -748,7 +829,21 @@
                             </div>
                         </div>
 
-                        <!-- Section 2: WhatsApp Cloud API -->
+                        <!-- Section 2: CSV Stock Import Option -->
+                        <div class="settings-section-card">
+                            <div class="settings-section-header" onclick="toggleSettingsSection('secCsvBody')">
+                                <span><i class="fa-solid fa-file-arrow-up" style="color:var(--emerald-neon);"></i> एक्सेल स्टॉक इम्पोर्ट (CSV)</span>
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </div>
+                            <div id="secCsvBody" class="settings-section-body">
+                                <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 10px;">अपनी CSV फाइल अपलोड करके एक साथ कई सामान स्टॉक में जोड़ें:</p>
+                                <label class="glass-btn-green" style="max-width: 240px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; font-size:13px; margin:0;">
+                                    <i class="fa-solid fa-file-arrow-up"></i> CSV फाइल चुनें <input type="file" id="csvFileInput" accept=".csv" onchange="importStockFromCSV(event)" style="display:none;">
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Section 3: WhatsApp Cloud API -->
                         <div class="settings-section-card">
                             <div class="settings-section-header" onclick="toggleSettingsSection('secWaBody')">
                                 <span><i class="fa-brands fa-whatsapp" style="color:var(--emerald-neon);"></i> WhatsApp Cloud API सेटिंग्स</span>
@@ -757,15 +852,15 @@
                             <div id="secWaBody" class="settings-section-body">
                                 <form onsubmit="saveSettings(event)">
                                     <div class="form-grid">
-                                        <div><label>WhatsApp Phone Number ID</label><input type="text" id="settingWaPhoneId" placeholder="Phone ID" value=""></div>
-                                        <div><label>WhatsApp Access Token</label><input type="password" id="settingWaToken" placeholder="Permanent Token" value=""></div>
+                                        <div><label>WhatsApp Phone Number ID</label><input type="text" id="settingWaPhoneId" placeholder="Phone ID दर्ज करें" value=""></div>
+                                        <div><label>WhatsApp Access Token</label><input type="password" id="settingWaToken" placeholder="Permanent Token दर्ज करें" value=""></div>
                                     </div>
                                     <button type="submit" class="glass-btn-blue" style="margin-top:6px;"><i class="fa-solid fa-floppy-disk"></i> WhatsApp सेटिंग्स सेव करें</button>
                                 </form>
                             </div>
                         </div>
 
-                        <!-- Section 3: Business, Direct Logo Upload & Security -->
+                        <!-- Section 4: Business, Direct Logo Upload & Security -->
                         <div class="settings-section-card">
                             <div class="settings-section-header" onclick="toggleSettingsSection('secBizBody')">
                                 <span><i class="fa-solid fa-shop" style="color:var(--amber-neon);"></i> दुकान, लोगो अपलोड और सुरक्षा सेटिंग्स</span>
@@ -779,7 +874,6 @@
                                         <div><label>संपर्क</label><input type="tel" id="settingContactNo" required value="" placeholder="मोबाइल नंबर"></div>
                                         <div><label>डिफ़ॉल्ट GST (%)</label><input type="number" id="settingDefaultGst" min="0" max="28" value="" placeholder="18"></div>
                                         
-                                        <!-- Direct Logo Image Upload Field -->
                                         <div style="grid-column: 1/-1;">
                                             <label><i class="fa-solid fa-image"></i> दुकान का लोगो अपलोड करें (Direct Image)</label>
                                             <input type="file" id="settingLogoFile" accept="image/*" onchange="handleLogoImageUpload(event)" style="padding: 8px !important;">
@@ -789,7 +883,7 @@
                                             </div>
                                         </div>
 
-                                        <div><label>पासवर्ड</label><input type="text" id="settingAdminPass" placeholder="नया पासवर्ड" value=""></div>
+                                        <div><label>पासवर्ड</label><input type="password" id="settingAdminPass" placeholder="नया एडमिन पासवर्ड दर्ज करें" value=""></div>
                                     </div>
                                     <button type="submit" class="glass-btn-blue" style="margin-top:6px;"><i class="fa-solid fa-floppy-disk"></i> दुकान सेटिंग्स सेव करें</button>
                                 </form>
@@ -816,6 +910,30 @@
 
         let firebaseApp;
         let dbRef = null;
+        let quotationCart = [];
+        let previousBookingsCount = 0;
+        let sidebarHideTimer = null;
+
+        function handleGlobalBodyClick(event) {
+            if (window.innerWidth <= 768) {
+                let sb = document.getElementById('appSidebar');
+                if (sb && sb.classList.contains('mobile-show')) {
+                    sb.classList.remove('mobile-show');
+                }
+            }
+        }
+
+        function resetSidebarTimer() {
+            if (window.innerWidth <= 768) {
+                let sb = document.getElementById('appSidebar');
+                if (sb && sb.classList.contains('mobile-show')) {
+                    if (sidebarHideTimer) clearTimeout(sidebarHideTimer);
+                    sidebarHideTimer = setTimeout(() => {
+                        sb.classList.remove('mobile-show');
+                    }, 4000);
+                }
+            }
+        }
 
         function initFirebaseConnection() {
             try {
@@ -825,10 +943,18 @@
                     firebaseApp = firebase.app();
                 }
                 dbRef = firebase.database().ref('tent_erp_data');
+                
                 dbRef.on('value', (snapshot) => {
                     let cloudData = snapshot.val();
                     if(cloudData) {
-                        if(cloudData.bookings) localStorage.setItem('softwareBookings', JSON.stringify(cloudData.bookings));
+                        if(cloudData.bookings) {
+                            let incomingBookings = cloudData.bookings;
+                            if(previousBookingsCount > 0 && incomingBookings.length > previousBookingsCount) {
+                                triggerMobilePushNotification("🔔 नई बुकिंग प्राप्त हुई!", "राधा कृष्णा टेंट हाउस पोर्टल पर एक नया आर्डर आया है।");
+                            }
+                            previousBookingsCount = incomingBookings.length;
+                            localStorage.setItem('softwareBookings', JSON.stringify(incomingBookings));
+                        }
                         if(cloudData.stock) localStorage.setItem('realStockDatabase', JSON.stringify(cloudData.stock));
                         if(cloudData.thirdParty) localStorage.setItem('thirdPartyDatabase', JSON.stringify(cloudData.thirdParty));
                         if(cloudData.purchase) localStorage.setItem('purchaseDatabase', JSON.stringify(cloudData.purchase));
@@ -841,19 +967,88 @@
             }
         }
 
+        function triggerMobilePushNotification(title, body) {
+            if ("Notification" in window) {
+                if (Notification.permission === "granted") {
+                    new Notification(title, { body: body, icon: "https://cdn-icons-png.flaticon.com/512/3176/3176363.png" });
+                } else if (Notification.permission !== "denied") {
+                    Notification.requestPermission().then(permission => {
+                        if (permission === "granted") {
+                            new Notification(title, { body: body });
+                        }
+                    });
+                }
+            }
+            try {
+                let audio = new Audio("https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3");
+                audio.play().catch(err => console.log("Audio play blocked", err));
+            } catch(e) {}
+            showActionMessage(title, "success");
+        }
+
         let customerCart = [];
         let fallbackStorage = {};
         let stockHtmlScanner = null;
         let currentCalendarDate = new Date();
 
-        // Set Minimum Date for Dispatch Date input field to Today on load
+        setInterval(() => {
+            let clockEl = document.getElementById('digitalClockLabel');
+            if(clockEl) {
+                let now = new Date();
+                clockEl.textContent = now.toLocaleTimeString('hi-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
+            }
+        }, 1000);
+
         window.addEventListener('DOMContentLoaded', () => {
             let todayStr = new Date().toISOString().slice(0, 10);
             let dispatchDateInput = document.getElementById('portalEventDate');
             if(dispatchDateInput) {
                 dispatchDateInput.min = todayStr;
             }
+            let purDateInput = document.getElementById('purDate');
+            if(purDateInput) {
+                purDateInput.value = todayStr;
+            }
+            let expDateDisplay = document.getElementById('currentExpenseDateDisplay');
+            if(expDateDisplay) {
+                expDateDisplay.textContent = todayStr;
+            }
+            if ("Notification" in window && Notification.permission !== "granted") {
+                Notification.requestPermission();
+            }
+            loadCorporateDashboardMetrics();
+            initFirebaseConnection();
         });
+
+        function loadCorporateDashboardMetrics() {
+            let bookings = safeGetStorage('softwareBookings', []);
+            let totalCust = bookings.length;
+            let activeBookings = bookings.filter(b => b.status === 'Dispatched' || b.status === 'Pending Approval').length;
+            
+            let totalDues = 0;
+            bookings.forEach(b => {
+                let total = calculateBookingTotalRent(b);
+                let paid = b.advanceAmount || 0;
+                if(total > paid) totalDues += (total - paid);
+            });
+
+            if(document.getElementById('corpTotalCust')) document.getElementById('corpTotalCust').textContent = totalCust;
+            if(document.getElementById('corpActiveBookings')) document.getElementById('corpActiveBookings').textContent = activeBookings;
+            if(document.getElementById('corpTotalDues')) document.getElementById('corpTotalDues').textContent = `₹${totalDues}`;
+            if(document.getElementById('corpMissingItems')) document.getElementById('corpMissingItems').textContent = "0";
+
+            if(document.getElementById('repCustCount')) document.getElementById('repCustCount').textContent = `${totalCust} रिकॉर्ड्स`;
+            if(document.getElementById('repBookingCount')) document.getElementById('repBookingCount').textContent = `${activeBookings} एक्टिव बुकिंग्स`;
+
+            let stockList = safeGetStorage('realStockDatabase', []);
+            if(document.getElementById('repStockCount')) document.getElementById('repStockCount').textContent = `${stockList.length} आइटम्स`;
+
+            let incomeList = safeGetStorage('incomeExpenseDatabase', []);
+            let totalInc = incomeList.filter(x => x.type === 'Income').reduce((s, x) => s + x.amount, 0);
+            let totalExp = incomeList.filter(x => x.type === 'Expense').reduce((s, x) => s + x.amount, 0);
+            if(document.getElementById('graphTotalIncome')) document.getElementById('graphTotalIncome').textContent = `₹${totalInc}`;
+            if(document.getElementById('graphTotalExpense')) document.getElementById('graphTotalExpense').textContent = `₹${totalExp}`;
+        }
 
         function updateReturnDateMinConstraint() {
             let dispatchDateInput = document.getElementById('portalEventDate');
@@ -911,10 +1106,292 @@
             if(sb) sb.classList.toggle('mobile-show');
         }
 
-        function toggleSettingsSection(bodyId) {
-            let bodyEl = document.getElementById(bodyId);
-            if(bodyEl) {
-                bodyEl.classList.toggle('show');
+        /* FIXED AI COMMAND EXECUTION LOGIC */
+        function executeAiCommand() {
+            let input = document.getElementById('aiCommandInput');
+            let resp = document.getElementById('aiAssistantResponse');
+            if(!input || !resp) return;
+            let cmd = input.value.trim().toLowerCase();
+            
+            if(cmd.includes('setting') || cmd.includes('सेटिंग्स')) {
+                switchTab('setting', document.querySelector('.menu-item:nth-child(15)'));
+                resp.textContent = "✅ सेटिंग्स पेज खोल दिया गया है!";
+            } else if(cmd.includes('stock') || cmd.includes('स्टॉक')) {
+                switchTab('stock', document.querySelector('.menu-item:nth-child(9)'));
+                resp.textContent = "✅ स्टॉक पेज खोल दिया गया है!";
+            } else if(cmd.includes('customer') || cmd.includes('कस्टमर')) {
+                switchTab('customer-list', document.querySelector('.menu-item:nth-child(4)'));
+                resp.textContent = "✅ कस्टमर्स लिस्ट खोल दी गई है!";
+            } else if(cmd.includes('booking') || cmd.includes('बुकिंग')) {
+                switchTab('booking-list', document.querySelector('.menu-item:nth-child(5)'));
+                resp.textContent = "✅ बुकिंग्स लिस्ट खोल दी गई है!";
+            } else if(cmd.includes('dispatch') || cmd.includes('डिस्पैच')) {
+                switchTab('dispatch', document.querySelector('.menu-item:nth-child(6)'));
+                resp.textContent = "✅ डिस्पैच पेज खोल दिया गया है!";
+            } else {
+                resp.textContent = `🔍 कमांड मिली: "${input.value}". कृपया सही मॉड्यूल का नाम बोलें या टाइप करें।`;
+            }
+            showActionMessage("AI Command Executed", "success");
+            input.value = '';
+        }
+
+        function startVoiceRecognition() {
+            if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+                alert("आपका ब्राउज़र वॉइस रिकग्निशन सपोर्ट नहीं करता है।");
+                return;
+            }
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            const recognition = new SpeechRecognition();
+            recognition.lang = 'hi-IN';
+            recognition.onstart = () => { showActionMessage("🎙️ सुन रहे हैं... बोलिए", "success"); };
+            recognition.onresult = (event) => {
+                let speechToText = event.results[0][0].transcript;
+                let input = document.getElementById('aiCommandInput');
+                if(input) input.value = speechToText;
+                executeAiCommand();
+            };
+            recognition.onerror = () => { showActionMessage("वॉयस रिकग्निशन विफल रहा", "error"); };
+            recognition.start();
+        }
+
+        function loadQuotationStockDropdown() {
+            let stock = safeGetStorage('realStockDatabase', []);
+            let sel = document.getElementById('quotStockSelect');
+            if(sel) {
+                sel.innerHTML = '<option value="" disabled selected>सामान चुनें</option>';
+                stock.forEach(s => {
+                    sel.innerHTML += `<option value="${s.name}|${s.singleRent || 500}">${s.name} (रेट: ₹${s.singleRent || 500})</option>`;
+                });
+            }
+        }
+
+        function generateAutoQuotationList() {
+            let guests = Number(document.getElementById('quotGuestCount').value) || 0;
+            let stock = safeGetStorage('realStockDatabase', []);
+            quotationCart = [];
+
+            if(guests > 0) {
+                stock.forEach(s => {
+                    let estQty = Math.max(1, Math.round((guests / 100) * (s.qty > 50 ? 20 : 5)));
+                    quotationCart.push({ name: s.name, qty: estQty, rate: s.singleRent || 500 });
+                });
+            }
+            renderQuotationTable();
+        }
+
+        function addQuotationManualItem() {
+            let itemVal = document.getElementById('quotStockSelect').value;
+            let qty = Number(document.getElementById('quotItemQty').value) || 1;
+            if(!itemVal) { showActionMessage("सामान चुनें!", "error"); return; }
+            let parts = itemVal.split('|');
+            let name = parts[0];
+            let rate = Number(parts[1]) || 500;
+
+            quotationCart.push({ name: name, qty: qty, rate: rate });
+            renderQuotationTable();
+            showActionMessage("कोटेशन में सामान जोड़ा गया", "success");
+        }
+
+        function renderQuotationTable() {
+            let tbody = document.getElementById('quotationTableBody');
+            if(!tbody) return;
+            tbody.innerHTML = quotationCart.length === 0 ? `<tr><td colspan="6" style="text-align:center;">कोटेशन खाली है... गेस्ट संख्या या सामान जोड़ें</td></tr>` : quotationCart.map((item, idx) => `
+                <tr>
+                    <td>${idx + 1}</td>
+                    <td><b>${item.name}</b></td>
+                    <td>${item.qty} पीस</td>
+                    <td>₹${item.rate}</td>
+                    <td>₹${item.qty * item.rate}</td>
+                    <td><button type="button" onclick="quotationCart.splice(${idx},1); renderQuotationTable();" class="action-btn" style="color:#e53e3e;"><i class="fa-solid fa-trash"></i></button></td>
+                </tr>
+            `).join('');
+        }
+
+        function sendQuotationViaWhatsApp() {
+            let name = document.getElementById('quotCustName').value.trim() || 'ग्राहक';
+            let mob = document.getElementById('quotCustMob').value.trim();
+            if(!mob || mob.length !== 10) { alert("कृपया 10 अंकों का सही मोबाइल नंबर दर्ज करें!"); return; }
+            if(quotationCart.length === 0) { alert("कोटेशन में कोई सामान नहीं है!"); return; }
+
+            let settings = safeGetStorage('softwareSettings', {});
+            let shopName = settings.businessName || "राधा कृष्णा टेंट हाउस";
+            let totalEst = quotationCart.reduce((sum, i) => sum + (i.qty * i.rate), 0);
+
+            let itemsStr = quotationCart.map(i => `• ${i.name} - ${i.qty} पीस (₹${i.rate}/पीस) = ₹${i.qty * i.rate}`).join('\n');
+            let msg = `📜 *${shopName} - प्राइस कोटेशन*\n\nप्रिय ${name},\nआपकी आवश्यकता के अनुसार अनुमानित कोटेशन निम्नलिखित है:\n\n${itemsStr}\n\n💰 *कुल अनुमानित राशि:* ₹${totalEst}\n\nनोट: यह केवल जानकारी के लिए कोटेशन है।\nधन्यवाद!`;
+
+            sendWhatsAppMessage(mob, msg);
+            showActionMessage("कोटेशन WhatsApp पर भेजा गया", "success");
+        }
+
+        function calculatePurchasePrices(mode) {
+            let qty = Number(document.getElementById('purItemQty').value) || 0;
+            let perPieceInput = document.getElementById('purItemPerPiecePrice');
+            let totalInput = document.getElementById('purItemTotalPrice');
+
+            if(mode === 'piece') {
+                let perPiece = Number(perPieceInput.value) || 0;
+                if(qty > 0) {
+                    totalInput.value = (qty * perPiece).toFixed(2);
+                }
+            } else if(mode === 'total' || mode === 'qty') {
+                let total = Number(totalInput.value) || 0;
+                if(qty > 0) {
+                    perPieceInput.value = (total / qty).toFixed(2);
+                }
+            }
+        }
+
+        function importStockFromCSV(event) {
+            let file = event.target.files[0];
+            if (!file) return;
+            let reader = new FileReader();
+            reader.onload = function(e) {
+                let text = e.target.result;
+                let lines = text.split('\n');
+                let stock = safeGetStorage('realStockDatabase', []);
+                let count = 0;
+                for(let i = 1; i < lines.length; i++) {
+                    let row = lines[i].split(',');
+                    if(row.length >= 5) {
+                        stock.push({
+                            name: row[0].trim(),
+                            qty: Number(row[1]) || 1,
+                            setRent: Number(row[2]) || 500,
+                            singleRent: Number(row[3]) || 700,
+                            missingCharge: Number(row[4]) || 100,
+                            barcode: 'ITM-' + Math.floor(100000 + Math.random() * 900000)
+                        });
+                        count++;
+                    }
+                }
+                safeSetStorage('realStockDatabase', stock);
+                loadRealStockList();
+                showActionMessage(`${count} सामान CSV से सफलतापूर्वक इम्पोर्ट हुए!`, "success");
+            };
+            reader.readAsText(file);
+        }
+
+        function startAiScanner() {
+            let modal = document.getElementById('aiScannerModal');
+            if(modal) modal.style.display = 'flex';
+            try {
+                stockHtmlScanner = new Html5Qrcode("stockAiReader");
+                stockHtmlScanner.start(
+                    { facingMode: "environment" },
+                    { fps: 10, qrbox: { width: 250, height: 150 } },
+                    (decodedText) => {
+                        document.getElementById('aiDetectedResult').textContent = `स्कैन कोड: ${decodedText}`;
+                        let stock = safeGetStorage('realStockDatabase', []);
+                        let found = stock.find(s => s.barcode === decodedText);
+                        if(found) {
+                            document.getElementById('aiOwnershipResult').textContent = `सामान मिला: ${found.name} (स्टॉक: ${found.qty})`;
+                            showActionMessage(`सामान: ${found.name}`, "success");
+                        } else {
+                            document.getElementById('aiOwnershipResult').textContent = "नया बारकोड, स्टॉक में जोड़ने के लिए नाम भरें";
+                            document.getElementById('stockItemName').value = decodedText;
+                        }
+                        stopAiScanner();
+                    },
+                    (error) => {}
+                ).catch(err => { console.log("Camera error:", err); });
+            } catch(e) { console.log("Scanner init error:", e); }
+        }
+
+        function stopAiScanner() {
+            if(stockHtmlScanner) {
+                stockHtmlScanner.stop().then(() => { stockHtmlScanner.clear(); }).catch(err => {});
+            }
+            let modal = document.getElementById('aiScannerModal');
+            if(modal) modal.style.display = 'none';
+        }
+
+        function printAllBarcodes() {
+            let stock = safeGetStorage('realStockDatabase', []);
+            if(stock.length === 0) { showActionMessage("प्रिंट करने के लिए कोई स्टॉक नहीं है!", "error"); return; }
+            let firstItem = stock[0];
+            document.getElementById('printItemName').textContent = `${firstItem.name} (Rent: ₹${firstItem.singleRent})`;
+            let svgEl = document.getElementById('barcodeSvgElement');
+            if(svgEl) {
+                JsBarcode(svgEl, firstItem.barcode || "ITM-123456", { format: "CODE128", width: 2, height: 50, displayValue: true });
+            }
+            document.getElementById('barcodePrintModal').style.display = 'flex';
+        }
+
+        function closeBarcodeModal() {
+            document.getElementById('barcodePrintModal').style.display = 'none';
+        }
+
+        function showCalendarDateDetails(dateStr) {
+            let bookings = safeGetStorage('softwareBookings', []);
+            let matchedBookings = bookings.filter(b => b.eventType !== 'Direct Due Entry' && b.date <= dateStr && dateStr <= b.returnDate);
+            let box = document.getElementById('calendarModalContentBox');
+            if(!box) return;
+
+            if(matchedBookings.length === 0) {
+                box.innerHTML = `<p style="text-align:center; color:var(--text-muted); padding:15px;">इस तारीख (${dateStr}) पर कोई बुकिंग नहीं है।</p>`;
+            } else {
+                box.innerHTML = matchedBookings.map(b => `
+                    <div style="background:#f1f5f9; padding:12px; border-radius:12px; margin-bottom:10px; border-left:4px solid var(--primary-blue);">
+                        <p><b>बुकिंग आईडी:</b> #${b.id}</p>
+                        <p><b>कस्टमर नाम:</b> ${b.name} (${b.mob})</p>
+                        <p><b>पता:</b> ${b.address}</p>
+                        <p><b>इवेंट:</b> ${b.eventType}</p>
+                        <p><b>तारीख:</b> ${b.date} से ${b.returnDate}</p>
+                        <p><b>स्टेटस:</b> <span style="color:var(--emerald-neon);">${b.status}</span></p>
+                    </div>
+                `).join('');
+            }
+            document.getElementById('calendarDetailsModal').style.display = 'flex';
+        }
+
+        function closeCalendarDetailsModal() {
+            document.getElementById('calendarDetailsModal').style.display = 'none';
+        }
+
+        function toggleThirdPartyDispatchBox() {
+            let chk = document.getElementById('useThirdPartyToggle');
+            let tpSec = document.getElementById('thirdPartyDispatchSection');
+            let ownerSec = document.getElementById('ownerStockDispatchSection');
+            let pricingModeSel = document.getElementById('dispatchPricingMode');
+            if (chk && tpSec && ownerSec) {
+                if(chk.checked) {
+                    tpSec.style.display = 'block';
+                    ownerSec.style.display = 'none';
+                    if(pricingModeSel) pricingModeSel.style.display = 'none';
+                    loadThirdPartyDropdownsForDispatch();
+                } else {
+                    tpSec.style.display = 'none';
+                    ownerSec.style.display = 'block';
+                    if(pricingModeSel) pricingModeSel.style.display = 'inline-block';
+                    loadStockDropdowns();
+                }
+            }
+        }
+
+        function loadThirdPartyDropdownsForDispatch() {
+            let partySelect = document.getElementById('tpDispatchPartySelect');
+            let tpList = safeGetStorage('thirdPartyDatabase', []);
+            let uniqueParties = [...new Set(tpList.map(tp => tp.partyName))];
+            if(partySelect) {
+                partySelect.innerHTML = '<option value="" disabled selected>पार्टी चुनें</option>';
+                uniqueParties.forEach(party => {
+                    partySelect.innerHTML += `<option value="${party}">${party}</option>`;
+                });
+            }
+        }
+
+        function populateTpItemsForParty() {
+            let partyName = document.getElementById('tpDispatchPartySelect').value;
+            let itemSelect = document.getElementById('tpDispatchItemDropdown');
+            let tpList = safeGetStorage('thirdPartyDatabase', []);
+            let partyItems = tpList.filter(tp => tp.partyName === partyName);
+
+            if(itemSelect) {
+                itemSelect.innerHTML = '<option value="" disabled selected>सामान चुनें</option>';
+                partyItems.forEach(tp => {
+                    itemSelect.innerHTML += `<option value="${tp.item}|${tp.costPrice || 400}|${tp.chargePrice || 600}">${tp.item}</option>`;
+                });
             }
         }
 
@@ -1088,6 +1565,10 @@
                 document.getElementById('masterLedgerAuthOverlay').style.display = 'none';
                 document.getElementById('ledgerAdminPass').value = '';
                 openActualMasterLedgerTab();
+                let sb = document.getElementById('appSidebar');
+                if(sb && window.innerWidth <= 768) {
+                    sb.classList.remove('mobile-show');
+                }
                 showActionMessage("लेज़र खुला", "success");
             } else {
                 showActionMessage("गलत पासवर्ड!", "error");
@@ -1200,6 +1681,7 @@
 
         function loadAllFirebaseData() {
             loadStockDropdowns();
+            loadQuotationStockDropdown();
             loadBookingsListTable();
             loadCustomerList();
             loadDispatchTable();
@@ -1209,6 +1691,7 @@
             loadThirdPartyLedger();
             loadCalendarGrid();
             loadSettingsToUI();
+            loadCorporateDashboardMetrics();
         }
 
         function switchTab(tabId, element) {
@@ -1231,519 +1714,6 @@
             if(sb && window.innerWidth <= 768) {
                 sb.classList.remove('mobile-show');
             }
-        }
-
-        function changeCalendarMonth(direction) {
-            currentCalendarDate.setMonth(currentCalendarDate.getMonth() + direction);
-            loadCalendarGrid();
-        }
-
-        function loadCalendarGrid() {
-            let year = currentCalendarDate.getFullYear();
-            let month = currentCalendarDate.getMonth();
-            
-            const monthNames = ["जनवरी", "फरवरी", "मार्च", "अप्रैल", "मई", "जून", "जुलाई", "अगस्त", "सितंबर", "अक्टूबर", "नवंबर", "दिसंबर"];
-            let titleEl = document.getElementById('calendarMonthTitle');
-            if(titleEl) titleEl.textContent = `${monthNames[month]} ${year}`;
-
-            let container = document.getElementById('calendarDaysContainer');
-            if(!container) return;
-            container.innerHTML = '';
-
-            let firstDayIndex = new Date(year, month, 1).getDay();
-            firstDayIndex = (firstDayIndex === 0) ? 6 : firstDayIndex - 1;
-            
-            let totalDays = new Date(year, month + 1, 0).getDate();
-            let bookings = safeGetStorage('softwareBookings', []);
-
-            for(let i = 0; i < firstDayIndex; i++) {
-                container.innerHTML += `<div class="calendar-day-cell" style="opacity:0.3; background:#d4dadf;"></div>`;
-            }
-
-            for(let day = 1; day <= totalDays; day++) {
-                let formattedMonth = (month + 1).toString().padStart(2, '0');
-                let formattedDay = day.toString().padStart(2, '0');
-                let currentDateStr = `${year}-${formattedMonth}-${formattedDay}`;
-
-                let dayBookings = bookings.filter(b => {
-                    return b.eventType !== 'Direct Due Entry' && b.date <= currentDateStr && currentDateStr <= b.returnDate;
-                });
-
-                let hasBookingClass = dayBookings.length > 0 ? 'has-booking' : '';
-                let bookingTags = dayBookings.map(b => `<div class="calendar-booking-tag" title="${b.name} (#${b.id})">#${b.id} ${b.name}</div>`).join('');
-
-                container.innerHTML += `
-                    <div class="calendar-day-cell ${hasBookingClass}">
-                        <div class="calendar-day-number">${day}</div>
-                        ${bookingTags}
-                    </div>
-                `;
-            }
-        }
-
-        function saveCustomerBooking(event) {
-            event.preventDefault();
-            let mobInput = document.getElementById('portalCustMob').value.trim();
-            let phoneRegex = /^[6-9][0-9]{9}$/;
-            if (!phoneRegex.test(mobInput)) {
-                alert("❌ अमान्य मोबाइल नंबर! कृपया सही 10 अंकों का जेन्युइन मोबाइल नंबर दर्ज करें (जो 6, 7, 8 या 9 से शुरू हो)।");
-                document.getElementById('portalCustMob').focus();
-                return;
-            }
-
-            let dispatchDateVal = document.getElementById('portalEventDate').value;
-            let returnDateVal = document.getElementById('portalReturnDate').value;
-            let todayStr = new Date().toISOString().slice(0, 10);
-
-            if(dispatchDateVal < todayStr) {
-                alert("❌ अमान्य डिस्पैच दिनांक! आप आज की तारीख से पहले की तारीख नहीं चुन सकते।");
-                return;
-            }
-
-            if(returnDateVal < dispatchDateVal) {
-                alert("❌ अमान्य वापसी दिनांक! वापसी की तारीख डिस्पैच तारीख से पहले नहीं हो सकती।");
-                return;
-            }
-
-            let bookings = safeGetStorage('softwareBookings', []);
-            let newId = bookings.length > 0 ? bookings[bookings.length - 1].id + 1 : 1001;
-            
-            let newBooking = {
-                id: newId,
-                name: document.getElementById('portalCustName').value.trim(),
-                mob: mobInput,
-                address: document.getElementById('portalCustAddress').value.trim(),
-                eventType: document.getElementById('portalEventType').value,
-                guestCount: Number(document.getElementById('portalGuestCount').value) || 100,
-                date: dispatchDateVal,
-                returnDate: returnDateVal,
-                advanceAmount: Number(document.getElementById('portalAdvanceAmount').value) || 0,
-                payMode: document.getElementById('portalPayMode').value,
-                items: [...customerCart],
-                status: 'Pending Approval',
-                partPayments: [],
-                lastReminderDate: new Date().toISOString().slice(0,10)
-            };
-
-            bookings.push(newBooking);
-            safeSetStorage('softwareBookings', bookings);
-            customerCart = [];
-            renderCustomerCart();
-            event.target.reset();
-
-            // Reset min date after reset
-            document.getElementById('portalEventDate').min = new Date().toISOString().slice(0, 10);
-
-            let settings = safeGetStorage('softwareSettings', {});
-            let shopName = settings.businessName || "राधा कृष्णा टेंट हाउस";
-            let msg = `👑 *${shopName}* \n\nप्रिय ${newBooking.name}, आपकी बुकिंग स्वीकार कर ली गई है!\n\n🔖 *बुकिंग आईडी:* #${newBooking.id}\n🎪 *इवेंट:* ${newBooking.eventType}\n📅 *डिस्पैच दिनांक:* ${newBooking.date}\n🔄 *वापसी दिनांक:* ${newBooking.returnDate}\n💰 *एडवांस जमा:* ₹${newBooking.advanceAmount}\n\nधन्यवाद!`;
-            sendWhatsAppMessage(newBooking.mob, msg, newBooking.id);
-
-            alert(`बुकिंग सफलतापूर्वक सबमिट हुई! ID: #${newId} (WhatsApp विवरण भेज दिया गया है)`);
-            loadAllFirebaseData();
-        }
-
-        function loadBookingsListTable() {
-            let bookings = safeGetStorage('softwareBookings', []);
-            let tbody = document.getElementById('bookingTableBody');
-            if(tbody) {
-                let actualBookings = bookings.filter(b => b.eventType !== 'Direct Due Entry');
-                tbody.innerHTML = actualBookings.length === 0 ? `<tr><td colspan="7" style="text-align:center;">कोई बुकिंग नहीं</td></tr>` : actualBookings.map(b => {
-                    let confirmBtn = (b.status === 'Pending Approval' || !b.status || b.status === 'Pending') ? 
-                        `<button type="button" onclick="approveBooking(${b.id})" class="action-btn" style="color:var(--emerald-neon);"><i class="fa-solid fa-check"></i> कन्फर्म करें</button>` : 
-                        `<span style="color:var(--emerald-neon); font-weight:bold;">कन्फर्मड</span>`;
-                    
-                    return `<tr>
-                        <td>#${b.id}</td>
-                        <td><b>${b.name}</b></td>
-                        <td>${b.mob}</td>
-                        <td>${b.eventType}</td>
-                        <td>${b.date}</td>
-                        <td><span style="color:${b.status === 'Pending Approval' ? 'var(--amber-neon)' : 'var(--emerald-neon)'}; font-weight:bold;">${b.status || 'Pending'}</span></td>
-                        <td>
-                            ${confirmBtn}
-                            <button type="button" onclick="deleteBooking(${b.id})" class="action-btn" style="color:#e53e3e; margin-left:4px;"><i class="fa-solid fa-trash"></i></button>
-                        </td>
-                    </tr>`;
-                }).join('');
-            }
-        }
-
-        function approveBooking(id) {
-            let bookings = safeGetStorage('softwareBookings', []);
-            let b = bookings.find(x => x.id === id);
-            if(b) {
-                b.status = 'Dispatched';
-                safeSetStorage('softwareBookings', bookings);
-                loadAllFirebaseData();
-                showActionMessage(`बुकिंग #${id} सफलतापूर्वक कन्फर्म कर दी गई!`, "success");
-            }
-        }
-
-        function deleteBooking(id) {
-            let bookings = safeGetStorage('softwareBookings', []);
-            let idx = bookings.findIndex(x => x.id === id);
-            if(idx !== -1) {
-                bookings.splice(idx, 1);
-                safeSetStorage('softwareBookings', bookings);
-                loadAllFirebaseData();
-                showActionMessage("रिकॉर्ड डिलीट हो गया", "success");
-            }
-        }
-
-        function loadDispatchTable() {
-            let bookings = safeGetStorage('softwareBookings', []);
-            let tbody = document.getElementById('dispatchTableBody');
-            if(tbody) {
-                let pending = bookings.filter(b => b.eventType !== 'Direct Due Entry' && b.status === 'Dispatched');
-                tbody.innerHTML = pending.length === 0 ? `<tr><td colspan="7" style="text-align:center;">कोई डिस्पैच पेंडिंग नहीं</td></tr>` : pending.map(b => `<tr><td>#${b.id}</td><td><b>${b.name}</b></td><td>${b.items ? b.items.map(i=>i.name).join(', ') : '-'}</td><td>1</td><td>${b.status}</td><td><button type="button" onclick="completeDispatch(${b.id})" class="action-btn" style="color:var(--emerald-neon);">पूर्ण</button></td></tr>`).join('');
-            }
-        }
-
-        function completeDispatch(id) {
-            let bookings = safeGetStorage('softwareBookings', []);
-            let stockList = safeGetStorage('realStockDatabase', []);
-            let b = bookings.find(x => x.id === id);
-            if(b) {
-                if(b.items) {
-                    for(let bookedItem of b.items) {
-                        let stockItem = stockList.find(s => s.name === bookedItem.name);
-                        if(stockItem && stockItem.qty < bookedItem.qty) {
-                            alert(`स्टॉक कम है: '${bookedItem.name}' (${stockItem.qty} शेष)। नेगेटिव स्टॉक की अनुमति नहीं है!`);
-                            return;
-                        }
-                    }
-                }
-                b.status = 'Completed / Delivered';
-                if(b.items) {
-                    b.items.forEach(bookedItem => {
-                        let stockItem = stockList.find(s => s.name === bookedItem.name);
-                        if(stockItem) stockItem.qty = Math.max(0, stockItem.qty - bookedItem.qty);
-                    });
-                }
-                safeSetStorage('softwareBookings', bookings);
-                safeSetStorage('realStockDatabase', stockList);
-                loadAllFirebaseData();
-
-                let settings = safeGetStorage('softwareSettings', {});
-                let shopName = settings.businessName || "राधा कृष्णा टेंट हाउस";
-                let itemsListStr = b.items ? b.items.map(i => `• ${i.name} (${i.qty} पीस)`).join('\n') : '';
-                let msg = `🚚 *${shopName} - डिस्पैच स्लिप*\n\nप्रिय ${b.name}, आपकी बुकिंग #${b.id} का सामान डिस्पैच कर दिया गया है:\n\n${itemsListStr}\n\nदिनांक: ${b.date} से ${b.returnDate}\n\nधन्यवाद!`;
-                sendWhatsAppMessage(b.mob, msg, b.id);
-
-                showActionMessage("डिस्पैच पूर्ण व WhatsApp स्लिप भेजी गई", "success");
-            }
-        }
-
-        function completeManualReturnProcess() {
-            let rows = document.querySelectorAll('.return-item-row');
-            if(rows.length === 0) { showActionMessage("कोई सामान लोड नहीं है!", "error"); return; }
-            
-            let missingDetails = [];
-            let stockList = safeGetStorage('realStockDatabase', []);
-            
-            rows.forEach(row => {
-                let itemName = row.getAttribute('data-item-name');
-                let givenQty = Number(row.getAttribute('data-given-qty'));
-                let returnedQty = Number(row.querySelector('.return-qty-input').value) || 0;
-                let missingQty = Math.max(0, givenQty - returnedQty);
-
-                if(missingQty > 0) {
-                    missingDetails.push({ name: itemName, missing: missingQty });
-                }
-
-                let stockItem = stockList.find(s => s.name === itemName);
-                if(stockItem) {
-                    stockItem.qty += returnedQty;
-                }
-            });
-
-            safeSetStorage('realStockDatabase', stockList);
-            loadAllFirebaseData();
-
-            let currentRetBooking = window.currentReturnBooking;
-            if(currentRetBooking) {
-                let settings = safeGetStorage('softwareSettings', {});
-                let shopName = settings.businessName || "राधा कृष्णा टेंट हाउस";
-                let missingStr = missingDetails.length > 0 ? missingDetails.map(m => `⚠️ ${m.name}: ${m.missing} पीस कम`).join('\n') : '✅ सभी सामान सही सलामत प्राप्त हुए।';
-                let msg = `🔄 *${shopName} - रिटर्न व मिसिंग रिपोर्ट*\n\nप्रिय ${currentRetBooking.name}, आपकी बुकिंग #${currentRetBooking.id} की सामान वापसी (Return) पूर्ण हो गई है:\n\n${missingStr}\n\nधन्यवाद!`;
-                sendWhatsAppMessage(currentRetBooking.mob, msg, currentRetBooking.id);
-            }
-
-            document.getElementById('returnManualCountingSection').style.display = 'none';
-            showActionMessage("सामान वापसी पूर्ण व WhatsApp स्लिप भेजी गई", "success");
-        }
-
-        function addSelectedItemToCart() {
-            let sel = document.getElementById('portalStockSelect');
-            if(!sel || !sel.value) return;
-            customerCart.push({ name: sel.value, qty: Number(document.getElementById('portalItemQty').value) || 1, rentPrice: 500 });
-            renderCustomerCart();
-            showActionMessage("जोड़ा गया", "success");
-        }
-
-        function renderCustomerCart() {
-            let tbody = document.getElementById('portalCartTableBody');
-            if(!tbody) return;
-            tbody.innerHTML = customerCart.length === 0 ? `<tr><td colspan="3" style="text-align: center;">कोई सामान नहीं</td></tr>` : customerCart.map((i, idx) => `<tr><td>${i.name}</td><td>${i.qty}</td><td style="text-align: right;"><button type="button" onclick="customerCart.splice(${idx},1);renderCustomerCart();" class="action-btn" style="color:#e53e3e;"><i class="fa-solid fa-trash"></i></button></td></tr>`).join('');
-        }
-
-        function updateDynamicPaymentQR() {
-            let amt = document.getElementById('portalAdvanceAmount').value || 0;
-            let canvas = document.getElementById('dynamicQrCanvas');
-            if(canvas) new QRious({ element: canvas, value: `upi://pay?pa=8120727987@upi&pn=Tent&am=${amt}`, size: 120 });
-        }
-
-        function togglePaymentFields() {
-            let mode = document.getElementById('portalPayMode').value;
-            let sec = document.getElementById('onlinePaymentSection');
-            if(sec) sec.style.display = mode === 'UPI' ? 'block' : 'none';
-        }
-
-        function saveStockItemReal(event) {
-            event.preventDefault();
-            let stock = safeGetStorage('realStockDatabase', []);
-            stock.push({
-                name: document.getElementById('stockItemName').value.trim(),
-                qty: Number(document.getElementById('stockItemQty').value),
-                setRent: Number(document.getElementById('stockItemSetRent').value),
-                singleRent: Number(document.getElementById('stockItemSingleRent').value),
-                missingCharge: Number(document.getElementById('stockItemMissing').value),
-                barcode: 'ITM-' + Math.floor(100000 + Math.random() * 900000)
-            });
-            safeSetStorage('realStockDatabase', stock);
-            event.target.reset();
-            loadAllFirebaseData();
-            showActionMessage("स्टॉक सेव हुआ", "success");
-        }
-
-        function loadRealStockList() {
-            let stock = safeGetStorage('realStockDatabase', []);
-            let tbody = document.getElementById('stockTableBody');
-            if(tbody) tbody.innerHTML = stock.length === 0 ? `<tr><td colspan="7" style="text-align:center;">कोई स्टॉक नहीं</td></tr>` : stock.map((s, i) => `<tr><td><b>${s.name}</b></td><td>${s.qty}</td><td>₹${s.setRent}</td><td>₹${s.singleRent}</td><td>₹${s.missingCharge}</td><td><code>${s.barcode}</code></td><td><button type="button" onclick="deleteRealStock(${i})" class="action-btn" style="color:#e53e3e;"><i class="fa-solid fa-trash"></i></button></td></tr>`).join('');
-        }
-
-        function deleteRealStock(idx) {
-            let st = safeGetStorage('realStockDatabase', []);
-            st.splice(idx, 1);
-            safeSetStorage('realStockDatabase', st);
-            loadAllFirebaseData();
-        }
-
-        function savePurchaseEntry(event) {
-            event.preventDefault();
-            let pur = safeGetStorage('purchaseDatabase', []);
-            pur.push({ date: document.getElementById('purDate').value, itemName: document.getElementById('purItemName').value.trim(), qty: document.getElementById('purItemQty').value, price: document.getElementById('purItemPrice').value, supplier: document.getElementById('purSupplier').value.trim() });
-            safeSetStorage('purchaseDatabase', pur);
-            event.target.reset();
-            loadPurchaseTable();
-            showActionMessage("परचेज सेव हुई", "success");
-        }
-
-        function loadPurchaseTable() {
-            let pur = safeGetStorage('purchaseDatabase', []);
-            let tbody = document.getElementById('purchaseTableBody');
-            if(tbody) tbody.innerHTML = pur.length === 0 ? `<tr><td colspan="6" style="text-align:center;">कोई परचेज नहीं</td></tr>` : pur.map((p, i) => `<tr><td>${p.date}</td><td>${p.itemName}</td><td>${p.qty}</td><td>₹${p.price}</td><td>${p.supplier}</td><td><button type="button" onclick="let p=safeGetStorage('purchaseDatabase',[]);p.splice(${i},1);safeSetStorage('purchaseDatabase',p);loadPurchaseTable();" class="action-btn" style="color:#e53e3e;"><i class="fa-solid fa-trash"></i></button></td></tr>`).join('');
-        }
-
-        function saveDailyExpense(event) {
-            event.preventDefault();
-            let list = safeGetStorage('incomeExpenseDatabase', []);
-            list.push({ date: new Date().toISOString().slice(0,10), desc: document.getElementById('expenseDesc').value.trim(), type: 'Expense', amount: Number(document.getElementById('expenseAmount').value) });
-            safeSetStorage('incomeExpenseDatabase', list);
-            event.target.reset();
-            loadIncomeExpenseTable();
-            showActionMessage("खर्च दर्ज हुआ", "success");
-        }
-
-        function loadIncomeExpenseTable() {
-            let list = safeGetStorage('incomeExpenseDatabase', []);
-            let tbody = document.getElementById('incomeExpenseTableBody');
-            if(tbody) {
-                tbody.innerHTML = list.length === 0 ? `<tr><td colspan="4" style="text-align:center;">कोई रिकॉर्ड नहीं</td></tr>` : list.map(i => `<tr><td>${i.date}</td><td>${i.desc}</td><td>${i.type}</td><td>₹${i.amount}</td></tr>`).join('');
-            }
-            let totalInc = list.filter(x => x.type === 'Income').reduce((s, x) => s + x.amount, 0);
-            let totalExp = list.filter(x => x.type === 'Expense').reduce((s, x) => s + x.amount, 0);
-            if(document.getElementById('graphTotalIncome')) document.getElementById('graphTotalIncome').textContent = `₹${totalInc}`;
-            if(document.getElementById('graphTotalExpense')) document.getElementById('graphTotalExpense').textContent = `₹${totalExp}`;
-        }
-
-        function loadCustomerList() {
-            let bookings = safeGetStorage('softwareBookings', []);
-            let tbody = document.getElementById('customerTableBody');
-            let settings = safeGetStorage('softwareSettings', {});
-            let shopName = settings.businessName || "राधा कृष्णा टेंट हाउस";
-
-            if(tbody) {
-                tbody.innerHTML = bookings.length === 0 ? `<tr><td colspan="9" style="text-align:center;">कोई रिकॉर्ड नहीं</td></tr>` : bookings.map(b => {
-                    let totalRent = calculateBookingTotalRent(b);
-                    let paidAmt = (b.advanceAmount || 0);
-                    let balanceDue = totalRent - paidAmt;
-                    
-                    let reminderBtn = '';
-                    if(balanceDue > 0) {
-                        let isEligible = checkSevenDayReminderEligibility(b);
-                        let btnColor = isEligible ? 'var(--amber-neon)' : 'var(--text-muted)';
-                        let btnText = isEligible ? '🔔 7-दिन रिमाइंडर भेजें' : '⏳ रिमाइंडर भेजा गया';
-                        
-                        let reminderMsg = `⚠️ *${shopName} - भुगतान रिमाइंडर*\n\nप्रिय ${b.name}, आपकी बुकिंग/खाता #${b.id} का कुल बकाया बैलेंस *₹${balanceDue}* बाकी है। कृपया इसे जल्द से जल्द जमा करें।\n\nधन्यवाद!`;
-                        
-                        reminderBtn = `<button type="button" onclick="sendWhatsAppMessage('${b.mob}', '${reminderMsg}', ${b.id}); loadCustomerList();" class="action-btn" style="color:${btnColor};">${btnText}</button>`;
-                    } else {
-                        reminderBtn = `<span style="color:var(--emerald-neon); font-weight:bold;">क्लीयर (0 ड्यू)</span>`;
-                    }
-
-                    return `<tr>
-                        <td><b>${b.name}</b></td>
-                        <td>
-                            <a href="tel:${b.mob}" style="text-decoration:none; color:var(--emerald-neon); font-weight:800; background:#d1fae5; padding:4px 8px; border-radius:8px; display:inline-flex; align-items:center; gap:4px;">
-                                <i class="fa-solid fa-phone"></i> ${b.mob}
-                            </a>
-                        </td>
-                        <td>${b.address}</td>
-                        <td>₹${totalRent}</td>
-                        <td>₹${paidAmt}</td>
-                        <td style="color:#e53e3e; font-weight:800;">₹${balanceDue}</td>
-                        <td>${reminderBtn}</td>
-                        <td>
-                            <button type="button" onclick="sendWhatsAppMessage('${b.mob}', 'नमस्ते ${b.name}, ${shopName} से आपके खाते #${b.id} के संबंध में संपर्क किया जा रहा है।')" class="action-btn" style="color:var(--emerald-neon);">
-                                <i class="fa-brands fa-whatsapp"></i> चैट
-                            </button>
-                        </td>
-                        <td><button type="button" onclick="deleteBooking(${b.id})" class="action-btn" style="color:#e53e3e;"><i class="fa-solid fa-trash"></i></button></td>
-                    </tr>`;
-                }).join('');
-            }
-        }
-
-        function loadThirdPartyLedger() {
-            let tpList = safeGetStorage('thirdPartyDatabase', []);
-            let container = document.getElementById('partyWiseTablesContainer');
-            let missingTbody = document.getElementById('thirdPartyMissingTableBody');
-            if(!container) return;
-
-            let uniqueParties = [...new Set(tpList.map(tp => tp.partyName))];
-            if(uniqueParties.length === 0) {
-                container.innerHTML = `<div class="table-responsive"><table><tr><td colspan="8" style="text-align:center;">कोई थर्ड-पार्टी एंट्री नहीं</td></tr></table></div>`;
-            } else {
-                container.innerHTML = uniqueParties.map(party => {
-                    let partyItems = tpList.filter(tp => tp.partyName === party);
-                    let rows = partyItems.map((tp, idx) => {
-                        let realIdx = tpList.indexOf(tp);
-                        return `<tr>
-                            <td><b>${tp.item}</b></td>
-                            <td>${tp.qty}</td>
-                            <td>₹${tp.costPrice || 400}</td>
-                            <td>₹${tp.chargePrice || 600}</td>
-                            <td style="color:#e53e3e;">₹${tp.dueAmount || tp.costPrice || 400}</td>
-                            <td><span style="font-weight:bold;">${tp.status || 'Pending'}</span></td>
-                            <td><button type="button" onclick="deleteThirdPartyEntry(${realIdx})" class="action-btn" style="color:#e53e3e;"><i class="fa-solid fa-trash"></i></button></td>
-                        </tr>`;
-                    }).join('');
-                    return `<div style="margin-bottom: 20px;"><h4 style="color: var(--primary-blue); font-size: 14px; margin-bottom: 6px;"><i class="fa-solid fa-shop"></i> पार्टी: ${party}</h4><div class="table-responsive"><table><thead><tr><th>सामान</th><th>मात्रा</th><th>देना किराया</th><th>लेना किराया</th><th>बकाया</th><th>स्थिति</th><th>एक्शन</th></tr></thead><tbody>${rows}</tbody></table></div></div>`;
-                }).join('');
-            }
-
-            if(missingTbody) {
-                let missingEntries = tpList.filter(tp => tp.missingQty && tp.missingQty > 0);
-                missingTbody.innerHTML = missingEntries.length === 0 ? `<tr><td colspan="4" style="text-align:center;">कोई मिसिंग आइटम नहीं</td></tr>` : missingEntries.map(tp => `<tr><td><b>${tp.partyName}</b></td><td>${tp.item}</td><td style="color:#e53e3e;">${tp.missingQty} पीस</td><td>₹${tp.missingPenalty || (tp.missingQty * 100)}</td></tr>`).join('');
-            }
-        }
-
-        function saveThirdPartyEntry(event) {
-            event.preventDefault();
-            let tpList = safeGetStorage('thirdPartyDatabase', []);
-            tpList.push({
-                partyName: document.getElementById('tpPartyName').value.trim(),
-                item: document.getElementById('tpItemName').value.trim(),
-                qty: Number(document.getElementById('tpItemQty').value) || 1,
-                costPrice: Number(document.getElementById('tpItemCost').value) || 400,
-                chargePrice: Number(document.getElementById('tpItemCharge').value) || 600,
-                dueAmount: (Number(document.getElementById('tpItemCost').value) || 400) * (Number(document.getElementById('tpItemQty').value) || 1),
-                status: 'Pending'
-            });
-            safeSetStorage('thirdPartyDatabase', tpList);
-            event.target.reset();
-            loadThirdPartyLedger();
-            showActionMessage("थर्ड-पार्टी एंट्री सेव हुई", "success");
-        }
-
-        function deleteThirdPartyEntry(idx) {
-            let tpList = safeGetStorage('thirdPartyDatabase', []);
-            tpList.splice(idx, 1);
-            safeSetStorage('thirdPartyDatabase', tpList);
-            loadThirdPartyLedger();
-            showActionMessage("डिलीट हो गया", "success");
-        }
-
-        function searchBillingCustomer() {
-            let searchId = document.getElementById('billSearchInput').value.trim();
-            let bookings = safeGetStorage('softwareBookings', []);
-            let b = bookings.find(x => x.id.toString() === searchId);
-            let tbody = document.getElementById('billItemsTableBody');
-            if(!tbody) return;
-
-            if(b) {
-                let days = calculateRentalDays(b.date, b.returnDate);
-                tbody.innerHTML = b.items ? b.items.map((i, idx) => {
-                    let amt = b.eventType === 'Direct Due Entry' ? i.rentPrice : i.qty * (i.rentPrice || 500) * days;
-                    return `<tr><td>${idx+1}</td><td>${i.name}</td><td>${i.qty}</td><td>${b.eventType === 'Direct Due Entry' ? '1' : days} दिन</td><td>₹${i.rentPrice || 500}</td><td>₹${amt}</td></tr>`;
-                }).join('') : `<tr><td colspan="6" style="text-align:center;">कोई सामान नहीं</td></tr>`;
-
-                let settings = safeGetStorage('softwareSettings', {});
-                let shopName = settings.businessName || "राधा कृष्णा टेंट हाउस";
-                let total = calculateBookingTotalRent(b);
-                let msg = `🧾 *${shopName} - फाइनल बिल*\n\nप्रिय ${b.name}, आपकी बुकिंग #${b.id} का फाइनल बिल तैयार है:\n\n कुल देय राशि: ₹${total}\n एडवांस जमा: ₹${b.advanceAmount || 0}\n शेष राशि: ₹${total - (b.advanceAmount || 0)}\n\nधन्यवाद!`;
-                sendWhatsAppMessage(b.mob, msg, b.id);
-                showActionMessage("बिल खोजा गया और WhatsApp पर भेजा गया", "success");
-            } else {
-                tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:#e53e3e;">बुकिंग नहीं मिली!</td></tr>`;
-            }
-        }
-
-        function saveSettings(event) {
-            event.preventDefault();
-            let settings = safeGetStorage('softwareSettings', {});
-            settings.businessName = document.getElementById('settingBusinessName').value.trim();
-            settings.developerName = document.getElementById('settingDeveloperName').value.trim();
-            settings.contactNo = document.getElementById('settingContactNo').value.trim();
-            settings.logoUrl = document.getElementById('settingLogoUrl').value.trim();
-            settings.defaultGst = Number(document.getElementById('settingDefaultGst').value) || 18;
-            settings.waPhoneId = document.getElementById('settingWaPhoneId').value.trim();
-            settings.waToken = document.getElementById('settingWaToken').value.trim();
-            let pass = document.getElementById('settingAdminPass').value.trim();
-            if(pass) settings.adminPass = pass;
-            safeSetStorage('softwareSettings', settings);
-            loadSettingsToUI();
-            showActionMessage("सेटिंग्स सेव हुई", "success");
-        }
-
-        function loadSettingsToUI() {
-            let s = safeGetStorage('softwareSettings', {});
-            let shopName = s.businessName || "राधा कृष्णा टेंट हाउस";
-            if(document.getElementById('settingBusinessName')) {
-                document.getElementById('settingBusinessName').value = shopName;
-                document.getElementById('settingDeveloperName').value = s.developerName || "SHARD PATEL";
-                document.getElementById('settingContactNo').value = s.contactNo || "8120727987";
-                let logoVal = s.logoUrl || "";
-                document.getElementById('settingLogoUrl').value = logoVal;
-                if(logoVal) {
-                    let previewImg = document.getElementById('logoPreviewImg');
-                    let previewContainer = document.getElementById('logoPreviewContainer');
-                    if(previewImg && previewContainer) {
-                        previewImg.src = logoVal;
-                        previewContainer.style.display = 'block';
-                    }
-                }
-                if(document.getElementById('settingDefaultGst')) document.getElementById('settingDefaultGst').value = s.defaultGst || 18;
-                if(document.getElementById('settingWaPhoneId')) document.getElementById('settingWaPhoneId').value = s.waPhoneId || "";
-                if(document.getElementById('settingWaToken')) document.getElementById('settingWaToken').value = s.waToken || "";
-                let urlInput = document.getElementById('settingSoftwareUrl');
-                if(urlInput && !urlInput.value) urlInput.value = "http://my-multi-shop.vercel.app";
-                if(urlInput) generatePortalQrCode(urlInput.value);
-            }
-            if(document.getElementById('displayShopName')) document.getElementById('displayShopName').textContent = shopName;
-            if(document.getElementById('overlayShopName')) document.getElementById('overlayShopName').textContent = shopName;
         }
     </script>
 </body>

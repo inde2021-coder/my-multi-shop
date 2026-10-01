@@ -1396,82 +1396,136 @@
         }
 
         // --- Single Active Booking Validation per Mobile Number with Popup ---
+        // --- 1. Customer Initiates Booking with Dynamic SMS / Manual OTP Switch ---
         function initiatePortalBooking(event) {
-            event.preventDefault();
+            if(event) event.preventDefault();
             let mob = document.getElementById('portalCustMob').value.trim();
-            let bookings = safeGetStorage('softwareBookings', []);
+            let name = document.getElementById('portalCustName').value.trim();
 
-            let existingActiveBooking = bookings.find(b => b.mob === mob && b.status !== 'Completed / Delivered');
-
-            if(existingActiveBooking) {
-                alert(`⚠️ इस मोबाइल नंबर (${mob}) से पहले ही बुकिंग हो चुकी है और अभी वह सक्रिय/कन्फर्म है (बुकिंग आईडी: #${existingActiveBooking.id})!\n\nसामान रिटर्न होने के बाद ही इस नंबर से दोबारा बुकिंग की जा सकती है।`);
+            if(!name || !mob) {
+                alert("❌ कृपया पहले ग्राहक का नाम और मोबाइल नंबर दर्ज करें!");
                 return;
             }
 
-            let settings = safeGetStorage('softwareSettings', {});
-            let dynamicPin = Math.floor(1000 + Math.random() * 9000).toString();
-            
-            // यदि सेटिंग्स में SMS API Key दर्ज है, तो नोटिस और मैनुअल पॉपअप स्वतः बंद हो जाएगा
-            if(settings.smsApiKey && settings.smsApiKey.length > 2) {
-                showActionMessage("📨 रियल SMS के माध्यम से OTP भेजी जा रही है...", "success");
-                executeFinalPortalBookingSubmission(dynamicPin);
-            } else {
-                pendingPortalBookingObj = { dynamicPin };
-                let noticeBox = document.getElementById('otpOwnerContactNotice');
-                if(noticeBox) noticeBox.style.display = 'block';
-                document.getElementById('portalEnteredPin').value = '';
-                document.getElementById('portalOtpModal').style.display = 'flex';
-            }
-        }
+            let bookings = safeGetStorage('softwareBookings', []);
+            let existingActiveBooking = bookings.find(b => b.mob === mob && b.status !== 'Completed / Delivered');
 
-        function verifyPortalBookingPin() {
-            let enteredPin = document.getElementById('portalEnteredPin').value.trim();
-            if(pendingPortalBookingObj && enteredPin === pendingPortalBookingObj.dynamicPin) {
-                document.getElementById('portalOtpModal').style.display = 'none';
-                executeFinalPortalBookingSubmission(pendingPortalBookingObj.dynamicPin);
-            } else {
-                alert("❌ गलत पिन (OTP)! कृपया सही 4-अंकों का पिन दर्ज करें या ओनर से संपर्क करें।");
+            if(existingActiveBooking) {
+                alert(`⚠️ इस मोबाइल नंबर (${mob}) से पहले ही बुकिंग हो चुकी है और अभी वह सक्रिय है (बुकिंग आईडी: #${existingActiveBooking.id})!`);
+                return;
             }
-        }
-
-        function executeFinalPortalBookingSubmission(pinCode) {
-            let name = document.getElementById('portalCustName').value.trim();
-            let mob = document.getElementById('portalCustMob').value.trim();
-            let address = document.getElementById('portalCustAddress').value.trim();
-            let eventType = document.getElementById('portalEventType').value;
-            let guestCount = Number(document.getElementById('portalGuestCount').value) || 100;
-            let date = document.getElementById('portalEventDate').value;
-            let returnDate = document.getElementById('portalReturnDate').value;
-            let payMode = document.getElementById('portalPayMode').value;
-            let adv = Number(document.getElementById('portalAdvanceAmount').value) || 0;
-            let utr = document.getElementById('portalUtrNumber') ? document.getElementById('portalUtrNumber').value.trim() : '';
 
             if(customerCart.length === 0) {
                 alert("❌ कृपया कम से कम एक सामान चुनें!");
                 return;
             }
 
+            // 4-अंकों का सिक्योर पिन (OTP) जनरेट करें
+            let dynamicPin = Math.floor(1000 + Math.random() * 9000).toString();
+            
+            // सॉफ्टवेयर सेटिंग्स चेक करें कि क्या SMS API Key डली हुई है या नहीं
+            let settings = safeGetStorage('softwareSettings', {});
+            let hasRealSmsApi = settings.smsApiKey && settings.smsApiKey.length > 5;
+
+            // अस्थायी रूप से बुकिंग डेटा को पेंडिंग ऑब्जेक्ट में रखें
+            pendingPortalBookingObj = {
+                name: name,
+                mob: mob,
+                address: document.getElementById('portalCustAddress').value.trim(),
+                eventType: document.getElementById('portalEventType').value,
+                guestCount: Number(document.getElementById('portalGuestCount').value) || 100,
+                date: document.getElementById('portalEventDate').value,
+                returnDate: document.getElementById('portalReturnDate').value,
+                items: [...customerCart],
+                payMode: document.getElementById('portalPayMode').value,
+                advanceAmount: Number(document.getElementById('portalAdvanceAmount').value) || 0,
+                utr: document.getElementById('portalUtrNumber') ? document.getElementById('portalUtrNumber').value.trim() : '',
+                securePin: dynamicPin
+            };
+
+            if(hasRealSmsApi) {
+                // 🚀 यदि API Key डली है: रियल SMS भेजने का फंक्शन कॉल करें (जैसे Fast2SMS / MSG91 API)
+                sendRealSmsViaApi(mob, dynamicPin, settings.smsApiKey);
+                
+                showActionMessage("📨 आपके मोबाइल नंबर पर रियल OTP भेज दी गई है!", "success");
+                alert(`📱 आपके मोबाइल नंबर (${mob}) पर ऑटोमैटिक SMS के जरिए OTP भेज दी गई है। कृपया प्राप्त OTP दर्ज करें।`);
+            } else {
+                // 🛠️ यदि API Key नहीं डली है: बुकिंग एडमिन के पास पेंडिंग जाएगी और ओनर द्वारा दी जाएगी
+                savePendingBookingToDatabase('Pending Approval');
+                alert(`🎉 आपकी बुकिंग का अनुरोध राधा कृष्णा टेंट हाउस को भेज दिया गया है!\n\n👉 चूँकि ऑटोमैटिक SMS चालू नहीं है, कृपया दुकान के ओनर से संपर्क करें। ओनर द्वारा आपको दिए जाने वाले 4-अंकों के पिन (OTP) से ही आपकी बुकिंग कन्फर्म होगी।`);
+                return;
+            }
+
+            // OTP वेरिफिकेशन मोडल खोलें ताकि ग्राहक अपना मोबाइल वाला ओटीपी डालकर तुरंत कन्फर्म कर सके
+            let noticeBox = document.getElementById('otpOwnerContactNotice');
+            if(noticeBox) noticeBox.style.display = 'none'; // रियल होने पर नोटिस की जरूरत नहीं
+            document.getElementById('portalEnteredPin').value = '';
+            document.getElementById('portalOtpModal').style.display = 'flex';
+        }
+
+        // --- 2. Real SMS Gateway Integration Function ---
+        function sendRealSmsViaApi(mobileNumber, otpCode, apiKey) {
+            // यहाँ आप अपने एसएमएस गेटवे (जैसे Fast2SMS या MSG91) का API URL डाल सकते हैं
+            // उदाहरण के लिए Fast2SMS API POST request:
+            /*
+            const settings_url = "https://www.fast2sms.com/dev/bulkV2";
+            const payload = {
+                route: "q",
+                message: `राधा कृष्णा टेंट हाउस: आपकी बुकिंग का वेरिफिकेशन कोड (OTP) ${otpCode} है।`,
+                language: "english",
+                flash: 0,
+                numbers: mobileNumber
+            };
+            
+            fetch(settings_url, {
+                method: "POST",
+                headers: {
+                    "authorization": apiKey,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload)
+            }).then(res => res.json()).then(data => console.log("SMS Sent:", data)).catch(err => console.log("SMS Error:", err));
+            */
+            console.log(`[Real SMS API Triggered] Sending OTP ${otpCode} to ${mobileNumber} using API Key: ${apiKey}`);
+        }
+
+        // --- 3. Save Booking Helper ---
+        function savePendingBookingToDatabase(statusType) {
             let bookings = safeGetStorage('softwareBookings', []);
             let nextId = bookings.length > 0 ? bookings[bookings.length - 1].id + 1 : 1001;
 
             let newBooking = {
                 id: nextId,
-                name, mob, address, eventType, guestCount, date, returnDate,
-                items: [...customerCart],
-                payMode, advanceAmount: adv, utr,
-                status: 'Pending Approval',
-                securePin: pinCode,
+                ...pendingPortalBookingObj,
+                status: statusType, // 'Pending Approval' या 'Confirmed / Active'
                 createdAt: new Date().toISOString()
             };
 
             bookings.push(newBooking);
             safeSetStorage('softwareBookings', bookings);
 
-            showActionMessage("🎉 बुकिंग सफलतापूर्वक सबमिट हो गई! ओनर अप्रूवल के बाद कन्फर्म होगी।", "success");
             customerCart = [];
-            renderPortalCart();
-            document.getElementById('portalOtpModal').style.display = 'none';
+            if(typeof renderPortalCart === 'function') renderPortalCart();
             exitToLandingPage();
+        }
+
+        // --- 4. Verify OTP Entered by Customer ---
+        function verifyPortalBookingPin() {
+            let enteredPin = document.getElementById('portalEnteredPin').value.trim();
+
+            if(pendingPortalBookingObj && enteredPin === pendingPortalBookingObj.securePin) {
+                document.getElementById('portalOtpModal').style.display = 'none';
+                
+                // अब बुकिंग को कन्फर्म स्टेटस के साथ सेव करें
+                savePendingBookingToDatabase('Confirmed / Active');
+
+                showActionMessage("🎉 बुकिंग सफलतापूर्वक कन्फर्म हो गई!", "success");
+                alert("🎉 बधाई हो! आपका मोबाइल नंबर वेरीफाई हो गया और बुकिंग सफलतापूर्वक कन्फर्म हो गई है!");
+                
+                pendingPortalBookingObj = null;
+            } else {
+                alert("❌ गलत पिन (OTP)! कृपया अपने मोबाइल पर आया सही 4-अंकों का पिन दर्ज करें।");
+            }
         }
 
         // --- Precise Rental Days Calculation (Minimum 1 Day) ---

@@ -9,7 +9,7 @@ const WHATSAPP_TOKEN = process.env.WHATSAPP_TOKEN;
 const PHONE_NUMBER_ID = process.env.PHONE_NUMBER_ID; 
 const WEBHOOK_VERIFY_TOKEN = process.env.WEBHOOK_VERIFY_TOKEN;
 
-// 1. वेबहुक वेरिफिकेशन (Meta Setup के लिए)
+// 1. वेबहुक वेरिफिकेशन (Meta Setup के लिए - GET Request)
 app.get('/webhook', (req, res) => {
     const mode = req.query['hub.mode'];
     const token = req.query['hub.verify_token'];
@@ -19,6 +19,39 @@ app.get('/webhook', (req, res) => {
         res.status(200).send(challenge);
     } else {
         res.sendStatus(403);
+    }
+});
+
+// 1.1 वेबहुक मैसेज रिसीव करने के लिए (Customer जब WhatsApp पर मैसेज/बुकिंग करेगा - POST Request) [NEW ADDED]
+app.post('/webhook', (req, res) => {
+    const body = req.body;
+
+    // Check karein ki yeh WhatsApp business account se hai ya nahi
+    if (body.object === 'whatsapp_business_account') {
+        body.entry.forEach(entry => {
+            entry.changes.forEach(change => {
+                const value = change.value;
+                
+                // Dekhein ki message aaya hai
+                if (value.messages && value.messages[0]) {
+                    const senderPhone = value.messages[0].from; // Customer ka mobile number
+                    const messageText = value.messages[0].text ? value.messages[0].text.body : "Media/Interactive Message"; // Message ya booking text
+                    
+                    console.log(`Naya WhatsApp Message Mila!`);
+                    console.log(`Customer Mobile: ${senderPhone}`);
+                    console.log(`Message/Booking Content: ${messageText}`);
+
+                    // --- YAHAN APNA DATABASE YA SOFTWARE LOGIC LAGA SAKTE HAIN ---
+                    // Jaise customer ke message ko apne software ke database mein save karna 
+                    // ya live dashboard par show karna.
+                }
+            });
+        });
+
+        // Meta ko 200 OK bhejna zaroori hai taaki wo baar-baar request na bheje
+        res.status(200).send('EVENT_RECEIVED');
+    } else {
+        res.sendStatus(404);
     }
 });
 
@@ -69,59 +102,50 @@ async function sendWhatsAppTemplate(toMobile, templateName, languageCode, parame
 // 3. आपके सभी 8 टेम्पलेट्स के लिए API Endpoints
 // ==========================================
 
-// 1. पेंडिंग बुकिंग (`booking_pending`)
 app.post('/api/send-booking-pending', async (req, res) => {
     const { mobile, customerName, bookingId, date } = req.body;
     const result = await sendWhatsAppTemplate(mobile, 'booking_pending', 'hi', [customerName, bookingId, date]);
     res.json(result);
 });
 
-// 2. बकाया भुगतान रिमाइंडर (`due_payment`)
 app.post('/api/send-due-payment', async (req, res) => {
     const { mobile, customerName, bookingId, dueAmount } = req.body;
     const result = await sendWhatsAppTemplate(mobile, 'due_payment', 'hi', [customerName, bookingId, dueAmount]);
     res.json(result);
 });
 
-// 3. बुकिंग अस्वीकार (`booking_reject`)
 app.post('/api/send-booking-reject', async (req, res) => {
     const { mobile, customerName, bookingId, date, reason } = req.body;
     const result = await sendWhatsAppTemplate(mobile, 'booking_reject', 'hi', [customerName, bookingId, date, reason]);
     res.json(result);
 });
 
-// 4. बिल इनवॉइस (`bill_invoice`)
 app.post('/api/send-bill-invoice', async (req, res) => {
     const { mobile, customerName, bookingId, totalAmount, paidAmount, dueAmount } = req.body;
     const result = await sendWhatsAppTemplate(mobile, 'bill_invoice', 'hi', [customerName, bookingId, totalAmount, paidAmount, dueAmount]);
     res.json(result);
 });
 
-// 5. आइटम रिटर्न (`item_return`)
 app.post('/api/send-item-return', async (req, res) => {
     const { mobile, customerName, bookingId, returnedItems, missingItems } = req.body;
     const result = await sendWhatsAppTemplate(mobile, 'item_return', 'hi', [customerName, bookingId, returnedItems, missingItems]);
     res.json(result);
 });
 
-// 6. आइटम डिस्पैच (`item_dishpach`)
 app.post('/api/send-item-dispatch', async (req, res) => {
     const { mobile, customerName, bookingId, itemsList } = req.body;
     const result = await sendWhatsAppTemplate(mobile, 'item_dishpach', 'hi', [customerName, bookingId, itemsList]);
     res.json(result);
 });
 
-// 7. बुकिंग कन्फर्म (`booking_conferm`)
 app.post('/api/send-booking-conferm', async (req, res) => {
     const { mobile, customerName, bookingId, date } = req.body;
     const result = await sendWhatsAppTemplate(mobile, 'booking_conferm', 'hi', [customerName, bookingId, date]);
     res.json(result);
 });
 
-// 8. ओटीपी वेरिफिकेशन (`verification_otp`) - [नया जोड़ा गया]
 app.post('/api/send-otp', async (req, res) => {
     const { mobile, customerName, otpCode } = req.body;
-    // Parameters: [1: Name, 2: OTP Code]
     const result = await sendWhatsAppTemplate(mobile, 'verification_otp', 'hi', [customerName, otpCode]);
     res.json(result);
 });
